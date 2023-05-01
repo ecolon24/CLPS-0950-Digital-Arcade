@@ -64,34 +64,31 @@ def main_menu():
                 if width/2-70 <= mouse[0] <= width/2+70 and height/2+20 <= mouse[1] <= height/2+60:
                     pygame.quit()
             #What happens when the tetris button is clicked
-            #currently operates same as quit button, as a placeholder
                 if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
-                    newscreen("tetris")
+                    gamescreen("tetris")
             #What happens when the snake button is clicked
-            #currently operates same as quit button, as a placeholder
                 if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
-                    newscreen("snake")
+                    gamescreen("snake")
             #What happens when the space invaders button is clicked
-            #currently operates same as quit button, as a placeholder
                 if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
-                    newscreen("space")
+                    gamescreen("space")
                   
 
-def newscreen(game):
+def gamescreen(game):
     running = True
-    mouse = pygame.mouse.get_pos()
     while running: 
-        tetrisscreen = pygame.display.set_mode((width, height))
-        tetrisscreen.fill((0, 0, 0))
-        if width-280 <= mouse[0] <= width-140 and height-80 <= mouse[1] <= height-40:
+        mouse = pygame.mouse.get_pos()
+        screen.fill((0, 0, 0))
+        if width-180 <= mouse[0] <= width-40 and height-80 <= mouse[1] <= height-40:
             pygame.draw.rect(screen,button_light,[width-180,height-80,140,40])    
         else:
             pygame.draw.rect(screen,button_dark,[width-180,height-80,140,40])
         screen.blit(quittext , (width-130,height-70))
         pygame.display.update() 
+
     # Start the appropriate game based on the button clicked
         if game == "tetris":
             pass
@@ -106,5 +103,6 @@ def newscreen(game):
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if width-280 <= mouse[0] <= width-140 and height-80 <= mouse[1] <= height-40:
                     pygame.quit()
+
   
 main_menu()
