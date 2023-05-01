@@ -11,7 +11,8 @@ background_colour = (204,229,255)
 button_light = (170,170,170)
 button_dark = (140,140,140)
 black = (0,0,0)
-myImage = Image.open("Typical_Tetris_Game")
+#myImage = Image.open("Documents/GitHub/CLPS-0950-Digital-Arcade/Typical_Tetris_Game.svg.png")
+
 
 #dimensions of window
 (width, height) = (1200, 800)
@@ -59,7 +60,7 @@ def main_menu():
         screen.blit(tetristext , (width/2-232,height/2-50))
         screen.blit(snaketext , (width/2-26,height/2-50))
         screen.blit(spacetext , (width/2+150,height/2-50))
-        screen.blit(myImage, (width/2,height/2))
+        #screen.blit(myImage2, (width/2,height/2))
         pygame.display.update()  
 
         for event in pygame.event.get():
