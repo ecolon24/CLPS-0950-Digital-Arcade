@@ -25,6 +25,61 @@ tetristext = textfont.render('Tetris' , True , background_colour)
 snaketext = textfont.render('Snake' , True , background_colour)
 spacetext = textfont.render('Space Invaders' , True , background_colour)
 
+
+def main_menu():
+    running = True
+    while running: 
+        mouse = pygame.mouse.get_pos()
+    #code for making tetris button lighter when hovered over it 
+        if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
+            pygame.draw.rect(screen,button_light,[width/2-280,height/2-60,140,40])    
+        else:
+            pygame.draw.rect(screen,button_dark,[width/2-280,height/2-60,140,40])
+    #code for making snake button lighter when hovered over it 
+        if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
+            pygame.draw.rect(screen,button_light,[width/2-70,height/2-60,140,40])    
+        else:
+            pygame.draw.rect(screen,button_dark,[width/2-70,height/2-60,140,40])
+    #code for making space invaders button lighter when hovered over it 
+        if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
+            pygame.draw.rect(screen,button_light,[width/2+140,height/2-60,140,40])    
+        else:
+            pygame.draw.rect(screen,button_dark,[width/2+140,height/2-60,140,40])
+    #code for making quit button lighter when hovered over it 
+        if width/2-70 <= mouse[0] <= width/2+70 and height/2+20 <= mouse[1] <= height/2+60:
+            pygame.draw.rect(screen,button_light,[width/2-70,height/2+20,140,40])        
+        else:
+            pygame.draw.rect(screen,button_dark,[width/2-70,height/2+20,140,40])
+      
+        screen.blit(quittext , (width/2-20,height/2+30))
+        screen.blit(tetristext , (width/2-232,height/2-50))
+        screen.blit(snaketext , (width/2-26,height/2-50))
+        screen.blit(spacetext , (width/2+150,height/2-50))
+        pygame.display.update()  
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if width/2-70 <= mouse[0] <= width/2+70 and height/2+20 <= mouse[1] <= height/2+60:
+                    pygame.quit()
+            #What happens when the tetris button is clicked
+            #currently operates same as quit button, as a placeholder
+                if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
+                    running = False
+                    newscreen("tetris")
+            #What happens when the snake button is clicked
+            #currently operates same as quit button, as a placeholder
+                if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
+                    running = False
+                    newscreen("snake")
+            #What happens when the space invaders button is clicked
+            #currently operates same as quit button, as a placeholder
+                if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
+                    running = False
+                    newscreen("space")
+                  
+
 def newscreen(game):
     newscreen = pygame.display.set_mode((width, height))
     newscreen.fill((0, 0, 0))
@@ -32,67 +87,15 @@ def newscreen(game):
     # Start the appropriate game based on the button clicked
     if game == "tetris":
         # Start the Tetris game here
+        running = True
         pass
     elif game == "snake":
         # Start the Snake game here
+        running = True
         pass
     elif game == "space":
         # Start the Space Invaders game here
+        running = True
         pass
   
-
-while True:
-    mouse = pygame.mouse.get_pos()
-    #code for making tetris button lighter when hovered over it 
-    if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
-        pygame.draw.rect(screen,button_light,[width/2-280,height/2-60,140,40])    
-    else:
-        pygame.draw.rect(screen,button_dark,[width/2-280,height/2-60,140,40])
-
-    #code for making snake button lighter when hovered over it 
-    if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
-        pygame.draw.rect(screen,button_light,[width/2-70,height/2-60,140,40])    
-    else:
-        pygame.draw.rect(screen,button_dark,[width/2-70,height/2-60,140,40])
-
-    #code for making space invaders button lighter when hovered over it 
-    if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
-        pygame.draw.rect(screen,button_light,[width/2+140,height/2-60,140,40])    
-    else:
-        pygame.draw.rect(screen,button_dark,[width/2+140,height/2-60,140,40])
-
-    #code for making quit button lighter when hovered over it 
-    if width/2-70 <= mouse[0] <= width/2+70 and height/2+20 <= mouse[1] <= height/2+60:
-        pygame.draw.rect(screen,button_light,[width/2-70,height/2+20,140,40])        
-    else:
-        pygame.draw.rect(screen,button_dark,[width/2-70,height/2+20,140,40])
-      
-      
-    screen.blit(quittext , (width/2-20,height/2+30))
-    screen.blit(tetristext , (width/2-232,height/2-50))
-    screen.blit(snaketext , (width/2-26,height/2-50))
-    screen.blit(spacetext , (width/2+150,height/2-50))
-    pygame.display.update()  
-
-
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if width/2-70 <= mouse[0] <= width/2+70 and height/2+20 <= mouse[1] <= height/2+60:
-                pygame.quit()
-            #What happens when the tetris button is clicked
-            #currently operates same as quit button, as a placeholder
-            if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
-                newscreen("tetris")
-            #What happens when the snake button is clicked
-            #currently operates same as quit button, as a placeholder
-            if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
-                newscreen("snake")
-            #What happens when the space invaders button is clicked
-            #currently operates same as quit button, as a placeholder
-            if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
-                newscreen("space")
-                  
-
-
+main_menu()
