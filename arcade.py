@@ -81,27 +81,30 @@ def main_menu():
                   
 
 def newscreen(game):
+    running = True
+    mouse = pygame.mouse.get_pos()
+    while running: 
+        tetrisscreen = pygame.display.set_mode((width, height))
+        tetrisscreen.fill((0, 0, 0))
+        if width-280 <= mouse[0] <= width-140 and height-80 <= mouse[1] <= height-40:
+            pygame.draw.rect(screen,button_light,[width-180,height-80,140,40])    
+        else:
+            pygame.draw.rect(screen,button_dark,[width-180,height-80,140,40])
+        screen.blit(quittext , (width-130,height-70))
+        pygame.display.update() 
     # Start the appropriate game based on the button clicked
-    if game == "tetris":
-        running = True
-        while running: 
-            tetrisscreen = pygame.display.set_mode((width, height))
-            tetrisscreen.fill((0, 0, 0))
-            pygame.display.flip()
-        pass
-    elif game == "snake":
-        running = True
-        while running: 
-            tetrisscreen = pygame.display.set_mode((width, height))
-            tetrisscreen.fill((0, 0, 0))
-            pygame.display.flip()
-        pass
-    elif game == "space":
-        running = True
-        while running: 
-            tetrisscreen = pygame.display.set_mode((width, height))
-            tetrisscreen.fill((0, 0, 0))
-            pygame.display.flip()
-        pass
+        if game == "tetris":
+            pass
+        elif game == "snake":
+            pass
+        elif game == "space":
+            pass
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if width-280 <= mouse[0] <= width-140 and height-80 <= mouse[1] <= height-40:
+                    pygame.quit()
   
 main_menu()
