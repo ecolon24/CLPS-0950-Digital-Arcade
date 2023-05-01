@@ -81,21 +81,27 @@ def main_menu():
                   
 
 def newscreen(game):
-    newscreen = pygame.display.set_mode((width, height))
-    newscreen.fill((0, 0, 0))
-    pygame.display.flip()
     # Start the appropriate game based on the button clicked
     if game == "tetris":
-        # Start the Tetris game here
         running = True
+        while running: 
+            tetrisscreen = pygame.display.set_mode((width, height))
+            tetrisscreen.fill((0, 0, 0))
+            pygame.display.flip()
         pass
     elif game == "snake":
-        # Start the Snake game here
         running = True
+        while running: 
+            tetrisscreen = pygame.display.set_mode((width, height))
+            tetrisscreen.fill((0, 0, 0))
+            pygame.display.flip()
         pass
     elif game == "space":
-        # Start the Space Invaders game here
         running = True
+        while running: 
+            tetrisscreen = pygame.display.set_mode((width, height))
+            tetrisscreen.fill((0, 0, 0))
+            pygame.display.flip()
         pass
   
 main_menu()
