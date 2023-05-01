@@ -7,10 +7,10 @@ pygame.init()
 
 #I want to get an image for the background of the start screen
 # but I'm not sure how to do that
-background_colour = (255,255,255)
+background_colour = (204,229,255)
 button_light = (170,170,170)
-button_dark = (100,100,100)
-
+button_dark = (140,140,140)
+black = (0,0,0)
 #dimensions of window
 (width, height) = (1200, 800)
 
@@ -22,10 +22,10 @@ pygame.display.flip()
 
 #text set up 
 textfont = pygame.font.SysFont('Arial',18)
-quittext = textfont.render('Quit' , True , background_colour)
-tetristext = textfont.render('Tetris' , True , background_colour)
-snaketext = textfont.render('Snake' , True , background_colour)
-spacetext = textfont.render('Space Invaders' , True , background_colour)
+quittext = textfont.render('Quit' , True , black)
+tetristext = textfont.render('Tetris' , True , black)
+snaketext = textfont.render('Snake' , True , black)
+spacetext = textfont.render('Space Invaders' , True , black)
 
 
 def main_menu():
