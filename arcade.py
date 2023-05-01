@@ -3,6 +3,8 @@ import sys
 
 pygame.init()
 
+#testing push evie
+
 #I want to get an image for the background of the start screen
 # but I'm not sure how to do that
 background_colour = (255,255,255)
