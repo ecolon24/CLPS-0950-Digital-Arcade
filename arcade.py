@@ -60,9 +60,11 @@ def main_menu():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+                sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if width/2-70 <= mouse[0] <= width/2+70 and height/2+20 <= mouse[1] <= height/2+60:
                     pygame.quit()
+                    sys.exit()
             #What happens when the tetris button is clicked
                 if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
@@ -100,9 +102,11 @@ def gamescreen(game):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+                sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if width-280 <= mouse[0] <= width-140 and height-80 <= mouse[1] <= height-40:
                     pygame.quit()
+                    sys.exit()
 
   
 main_menu()
