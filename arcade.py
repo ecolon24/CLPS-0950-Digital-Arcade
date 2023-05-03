@@ -1,7 +1,6 @@
 import pygame
 import sys
 from PIL import Image
-import requests
 from io import BytesIO
 #import space_invaders
 
