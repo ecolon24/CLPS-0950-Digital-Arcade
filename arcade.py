@@ -69,7 +69,6 @@ def main_menu():
         screen.blit(tetristext , (width/2-232,height/2-50))
         screen.blit(snaketext , (width/2-26,height/2-50))
         screen.blit(spacetext , (width/2+150,height/2-50))
-        #screen.blit(img.show(), (width/2,height/2))
         pygame.display.update()  
 
         for event in pygame.event.get():
