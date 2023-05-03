@@ -1,7 +1,8 @@
 import pygame
 import sys
 from PIL import Image
-
+import requests
+from io import BytesIO
 
 pygame.init()
 
@@ -11,7 +12,13 @@ background_colour = (204,229,255)
 button_light = (170,170,170)
 button_dark = (140,140,140)
 black = (0,0,0)
-#myImage = Image.open("Documents/GitHub/CLPS-0950-Digital-Arcade/Typical_Tetris_Game.svg.png")
+#myImage = Image.open("MacintoshHD/Users/EvelynKrall/Documents/GitHub/CLPS-0950-Digital-Arcade/Typical_Tetris_Game.svg.png")
+#myImage = Image.open('./Images_folder')
+#url = 'https://github.com/ecolon24/CLPS-0950-Digital-Arcade/blob/main/Typical_Tetris_Game.svg.png'
+
+#response = requests.get(url)
+#img = Image.open(BytesIO(response.content))
+
 
 
 #dimensions of window
@@ -60,7 +67,7 @@ def main_menu():
         screen.blit(tetristext , (width/2-232,height/2-50))
         screen.blit(snaketext , (width/2-26,height/2-50))
         screen.blit(spacetext , (width/2+150,height/2-50))
-        #screen.blit(myImage2, (width/2,height/2))
+        #screen.blit(img.show(), (width/2,height/2))
         pygame.display.update()  
 
         for event in pygame.event.get():
