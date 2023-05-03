@@ -118,4 +118,25 @@ T_shape= [['.....'
 #fun fact: Avid tetris fans refer to 'Tetris shapes' as tetriminos!
 tetriminos= [S_shape, Z_shape, I_shape, O_shape, J_shape, L_shape, T_shape]
 tetrimino_colors= [(0,255,0), (255,0,0), (0,255,255),(255,255,0),(225,165,0),(0,0,255),(128,0,128)]
-print(tetriminos)
+
+#function that holds the placement of the pieces!
+#new keyword; self! Did a bit of research for it :) 
+class Piece(object):
+    def __init__(self,x,y,tetriminos):
+        self.x= x
+        self.y= y
+        self.tetriminos= tetriminos
+        self.color= tetrimino_colors[tetriminos.index(tetriminos)]
+        self.rotation= 0
+
+        pass
+def create_grid(locked_positions={}):
+    pass
+def convert_format_of_tetrimino(tetriminos):
+    pass
+def valid_space (tetriminos,grid):
+    pass
+def lost_check(positions):
+    pass
+def grab_tetrimino():
+    pass
