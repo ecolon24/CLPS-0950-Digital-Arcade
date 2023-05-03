@@ -3,6 +3,7 @@ import random
 import pygame
 from os import stat_result
 import os.path
+import sys
 
 pygame.init()
 
@@ -19,10 +20,9 @@ yellow = (255,255,0)
 aqua = (0,255,255)
 fushia = (255,0,255)
 
+#setup display
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Space Invaders')
-screen.fill(red)
+screen.fill(blue)
 pygame.display.flip()
-
-
 
