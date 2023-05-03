@@ -128,15 +128,29 @@ class Piece(object):
         self.tetriminos= tetriminos
         self.color= tetrimino_colors[tetriminos.index(tetriminos)]
         self.rotation= 0
-
         pass
+
+    #creating a list for every row on the grid. 10 blocks width, 20 blocks height!
+    #intialize with all black, will fill in with specified colors as the person plays the game.
+    #locked_position is for when the user "drops + locks in" their blocks, become static instead of dynamic pieces. keep in mind there is a color change because each tetrimino is a dif color!
 def create_grid(locked_positions={}):
+    grid = [[(0,0,0) for x in range(10)] for y in range(20)]
+     
+     #j is the x, i is the y... 
+    for i in range (len(grid)):
+        for j in range (len(grid[i])):
+            if (j,i) in locked_positions:
+                lp= locked_positions[(j,i)]
+                grid[i][j]= lp
+    return grid
     pass
+
+
 def convert_format_of_tetrimino(tetriminos):
     pass
-def valid_space (tetriminos,grid):
+def legit_space (tetriminos,grid):
     pass
 def lost_check(positions):
     pass
-def grab_tetrimino():
+def grabing_tetrimino():
     pass
