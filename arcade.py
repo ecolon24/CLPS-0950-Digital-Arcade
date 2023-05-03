@@ -108,7 +108,7 @@ def gamescreen(game):
         if game == "tetris":
             pass
         elif game == "snake":
-            pass
+            pass 
         elif game == "space":
             pass
         
