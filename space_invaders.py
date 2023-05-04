@@ -19,10 +19,13 @@ black = (0,0,0)
 yellow = (255,255,0)
 aqua = (0,255,255)
 fushia = (255,0,255)
+BG = pygame.transform.scale(pygame.image.load(os.path.join("Downloads","Space Shooter Pics","assets", "background.jpeg")), (width, height))
 
 #setup display
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Space Invaders')
-screen.fill(blue)
+screen.blit(BG, (0,0))
 pygame.display.flip()
+
+
 
