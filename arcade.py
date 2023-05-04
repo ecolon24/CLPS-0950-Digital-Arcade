@@ -2,6 +2,8 @@ import pygame
 import sys
 from PIL import Image
 from io import BytesIO
+from os import stat_result
+import os.path
 #import space_invaders
 
 

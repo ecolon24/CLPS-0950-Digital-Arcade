@@ -7,7 +7,7 @@ import sys
 
 pygame.init()
 
-(width, height) = (1200, 1000)
+(width, height) = (800, 600)
 fps = 60
 
 #colors for changing later
@@ -27,5 +27,21 @@ pygame.display.set_caption('Space Invaders')
 screen.blit(BG, (0,0))
 pygame.display.flip()
 
+#making spaceship images C:\\Users\\DELL\\Downloads\\gfg.png
+player_image = pygame.image.load("/Users/EvelynKrall/Downloads/Space Shooter Pics/assets/pinky.png")
+player_X = 370
+player_Y = 523
+player_Xchange = 0
 
+crashed = False
+x =  (100)
+y = (100)
+def car(x,y):
+    screen.blit(player_image, (x,y))
+
+
+while not crashed:
+    car(x,y)
+
+#screen.blit(player_image, (width/2,height/2))
 
