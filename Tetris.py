@@ -21,7 +21,6 @@ quit_text= text_font.render('Quit', True, r)
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Digital Aracde')
 screen.fill(background_color_main)
-pygame.display.flip()
 
 #play area 
 upper_left_x= (screen_width-play_width)//2
@@ -173,15 +172,24 @@ def grabbing_tetrimino(tetriminos):
 
 #the code that actually draws the grid on the screen display! Have to account for different color the the blocks composing the grid
 #needs to be 2D, like a mathematical grid. use rows +columns 
-def drawing_the_grid(surface): 
-    surface.fill= (0,0,0) #background intially is black. 
+def drawing_the_grid(surface,grid): 
+    #Actually drawing the grid now; i = x coordinate, j= y coordinate? 
+    for i in range (len(grid)):
+        for j in range (len(grid[i])):
+            pygame.draw.rect((surface, grid[i][j], upper_left_x+j*30, upper_left_y+i*30, block_size, block_size)) #creates blocks horizontally+vertically
+    pygame.draw.surface(surface, (128,128,128), (upper_left_x, upper_left_y, play_width, play_height),4) #grey rectangle that surrounds the border of the grid!
+
+def window_draw (surface,grid): 
+    surface.fill= ((0,0,0))#background intially is black. 
     
     #Creating the Tetris label + Drawing it on the Screen!
     pygame.font.init()
     Tetris_font= pygame.font.SysFont('Fixedsys', 40)
     title_label= Tetris_font.render('Tetris', 1, (255,0,0)) #red for now; can I make each letter a dif color? more nostalgic this way!
-    surface.blit(title_label, (upper_left_x + (play_width//2)-title_label.get_width)) #will center the text in the middle of the X axis, malleable if I were to change the screen size. 
+    surface.blit(title_label, (upper_left_x + (play_width//2)-title_label.get_width), 30) #will center the text in the middle of the X axis, malleable if I were to change the screen size. y is fixed at the top of the screen, so just choose a value + see?
 
+    drawing_the_grid(surface,grid)
+    pygame.display.update
 
 
 
