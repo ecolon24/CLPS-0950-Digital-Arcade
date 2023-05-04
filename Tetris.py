@@ -131,7 +131,8 @@ T_shape= [['.....'
 #Shape Colors! Had to do a bit of research to find these but :) 
 #fun fact: Avid tetris fans refer to 'Tetris shapes' as tetriminos!
 tetriminos= [S_shape, Z_shape, I_shape, O_shape, J_shape, L_shape, T_shape]
-tetrimino_colors= [(0,255,0), (255,0,0), (0,255,255),(255,255,0),(225,165,0),(0,0,255),(128,0,128)]
+tetrimino_colors= [(0,255,0), (255,0,0), (0,255,255),(255,255,0),(225,165,0),(0,0,255),(128,0,128)] #should make colors variables? would be a more "efficient" way to read.  
+
 
 #function that holds the placement of the pieces!
 #new keyword; self! Did a bit of research for it :) 
@@ -176,7 +177,7 @@ def drawing_the_grid(surface,grid):
     #Actually drawing the grid now; i = x coordinate, j= y coordinate? 
     for i in range (len(grid)):
         for j in range (len(grid[i])):
-            pygame.draw.rect((surface, grid[i][j], upper_left_x+j*30, upper_left_y+i*30, block_size, block_size)) #creates blocks horizontally+vertically
+            pygame.draw.rect((surface, grid[i][j], upper_left_x+j*block_size, upper_left_y+i*block_size, block_size, block_size)) #creates blocks horizontally+vertically
     pygame.draw.surface(surface, (128,128,128), (upper_left_x, upper_left_y, play_width, play_height),4) #grey rectangle that surrounds the border of the grid!
 
 def window_draw (surface,grid): 
@@ -189,7 +190,7 @@ def window_draw (surface,grid):
     surface.blit(title_label, (upper_left_x + (play_width//2)-title_label.get_width), 30) #will center the text in the middle of the X axis, malleable if I were to change the screen size. y is fixed at the top of the screen, so just choose a value + see?
 
     drawing_the_grid(surface,grid)
-    pygame.display.update
+    pygame.display.update()
 
 
 
