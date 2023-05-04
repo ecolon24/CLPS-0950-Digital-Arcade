@@ -14,15 +14,16 @@ r= (255,0,0)
 
 #font to use in the game
 text_font= pygame.font.SysFont('Fixedsys', 20)
+#font for leaving the game if you desire halfway through!
 quit_text= text_font.render('Quit', True, r)
 
-#making the window to open Tetris
+#making the window to open Tetris  (works now)
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Digital Aracde')
 screen.fill(background_color_main)
 pygame.display.flip()
 
-#play area
+#play area 
 upper_left_x= (screen_width-play_width)//2
 upper_left_y= screen_height - play_height
 
@@ -157,7 +158,6 @@ def create_grid(locked_positions={}):
                 lp= locked_positions[(j,i)]
                 grid[i][j]= lp
     return grid
-    pass
 
 
 def convert_format_of_tetrimino(tetriminos):
@@ -166,5 +166,22 @@ def legit_space (tetriminos,grid):
     pass
 def lost_check(positions):
     pass
-def grabing_tetrimino():
-    pass
+
+#ensures that the pieces being grabbed are in a random order--> User can't predict the pattern + always win the Tetris game! Fixed an intial concern we had :) 
+def grabbing_tetrimino(tetriminos):
+    return random.choice(tetriminos)
+
+#the code that actually draws the grid on the screen display! Have to account for different color the the blocks composing the grid
+#needs to be 2D, like a mathematical grid. use rows +columns 
+def drawing_the_grid(surface): 
+    surface.fill= (0,0,0) #background intially is black. 
+    
+    #Creating the Tetris label + Drawing it on the Screen!
+    pygame.font.init()
+    Tetris_font= pygame.font.SysFont('Fixedsys', 40)
+    title_label= Tetris_font.render('Tetris', 1, (255,0,0)) #red for now; can I make each letter a dif color? more nostalgic this way!
+    surface.blit(title_label, (upper_left_x + (play_width//2)-title_label.get_width)) #will center the text in the middle of the X axis, malleable if I were to change the screen size. 
+
+
+
+
