@@ -1,5 +1,6 @@
 import pygame
 import random 
+import sys
 
 pygame.init()
 
@@ -169,16 +170,11 @@ def lost_check(positions):
 
 #ensures that the pieces being grabbed are in a random order--> User can't predict the pattern + always win the Tetris game! Fixed an intial concern we had :) 
 def grabbing_tetrimino(tetriminos):
-    return random.choice(tetriminos)
+    return Piece(5,0, random.choice(tetriminos))
 
 #the code that actually draws the grid on the screen display! Have to account for different color the the blocks composing the grid
 #needs to be 2D, like a mathematical grid. use rows +columns 
-def drawing_the_grid(surface,grid): 
-    #Actually drawing the grid now; i = x coordinate, j= y coordinate? 
-    for i in range (len(grid)):
-        for j in range (len(grid[i])):
-            pygame.draw.rect((surface, grid[i][j], upper_left_x+j*block_size, upper_left_y+i*block_size, block_size, block_size)) #creates blocks horizontally+vertically
-    pygame.draw.surface(surface, (128,128,128), (upper_left_x, upper_left_y, play_width, play_height),4) #grey rectangle that surrounds the border of the grid!
+def drawing_the_gridlines(surface,grid): 
 
 def window_draw (surface,grid): 
     surface.fill= ((0,0,0))#background intially is black. 
@@ -189,8 +185,57 @@ def window_draw (surface,grid):
     title_label= Tetris_font.render('Tetris', 1, (255,0,0)) #red for now; can I make each letter a dif color? more nostalgic this way!
     surface.blit(title_label, (upper_left_x + (play_width//2)-title_label.get_width), 30) #will center the text in the middle of the X axis, malleable if I were to change the screen size. y is fixed at the top of the screen, so just choose a value + see?
 
+    #Actually drawing the grid now; i = x coordinate, j= y coordinate? 
+    for i in range (len(grid)):
+        for j in range (len(grid[i])):
+            pygame.draw.rect((surface, grid[i][j], upper_left_x+j*block_size, upper_left_y+i*block_size, block_size, block_size)) #creates blocks horizontally+vertically
+    pygame.draw.surface(surface, (128,128,128), (upper_left_x, upper_left_y, play_width, play_height),4) #grey rectangle that surrounds the border of the grid!
+
     drawing_the_grid(surface,grid)
     pygame.display.update()
+
+def figure_main_movement():
+    #have to account for "locking" the pieces in place. 
+    locked_positions= {}
+    grid= create_grid(locked_positions)
+
+    #current piece + piece on deck + possible avenues
+    current_tetrimino= grabbing_tetrimino()
+    next_tetrimino = grabbing_tetrimino()
+    change_tetrimino= False
+    run_it=True
+
+    #fall time for the piece + creating a clock function (time is key in Tetris)
+    fall_time= 0 
+    clock= pygame.time.Clock()
+
+    while run_it: 
+        for event in pygame.event.get:
+            #quitting the game when desired!
+            if event.type == pygame.QUIT:
+                sys.exit
+            #hardcoding in the keys the user will use to move/rotate the tetrimino. Pretty self explanatory for the most part. 
+            if event.type== pygame.KEYDOWN: #be sure to account for moving tetriminos off the grid; wanna make sure this doesn't happen.
+                if event.key== pygame.K_LEFT:
+                    current_tetrimino.x -=1
+                    if not legit_space(current_tetrimino,grid): 
+                        current_tetrimino.x +=1
+                if event.key== pygame.K_RIGHT:
+                    current_tetrimino.x += 1
+                    if not legit_space(current_tetrimino, grid):
+                        current_tetrimino.x -=1
+                #can't move up in Tetris, makes sense to use the up key as a rotation button!
+                if event.key == pygame.K_UP:
+                    current_tetrimino.rotation +=1
+                    if not legit_space(current_tetrimino, grid):
+                        current_tetrimino.rotation-=1
+                if event.key == pygame.K_DOWN:
+                    current_tetrimino.y -=1
+                    if not legit_space(current_tetrimino,grid):
+                        current_tetrimino.y -=1
+
+
+
 
 
 
