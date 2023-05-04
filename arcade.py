@@ -2,6 +2,8 @@ import pygame
 import sys
 from PIL import Image
 from io import BytesIO
+from os import stat_result
+import os.path
 #import space_invaders
 
 
@@ -95,22 +97,13 @@ def main_menu():
 def gamescreen(game):
     running = True
     while running: 
-        mouse = pygame.mouse.get_pos()
-        screen.fill((0, 0, 0))
-        if width-180 <= mouse[0] <= width-40 and height-80 <= mouse[1] <= height-40:
-            pygame.draw.rect(screen,button_light,[width-180,height-80,140,40])    
-        else:
-            pygame.draw.rect(screen,button_dark,[width-180,height-80,140,40])
-        screen.blit(quittext , (width-130,height-70))
-        pygame.display.update() 
-
     # Start the appropriate game based on the button clicked
         if game == "tetris":
-            pass
+            import Tetris
         elif game == "snake":
-            pass 
+            import snake
         elif game == "space":
-            pass
+            import space_invaders
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
