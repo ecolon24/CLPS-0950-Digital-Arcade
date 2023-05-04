@@ -1,12 +1,26 @@
 import pygame
 import random 
 
+pygame.init()
+
 #Global Variables 
 screen_width= 800
 screen_height= 700 
 play_width=300
 play_height= 600
 block_size= 30
+background_color_main= (0,0,0)
+r= (255,0,0)
+
+#font to use in the game
+text_font= pygame.font.SysFont('Fixedsys', 20)
+quit_text= text_font.render('Quit', True, r)
+
+#making the window to open Tetris
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption('Digital Aracde')
+screen.fill(background_color_main)
+pygame.display.flip()
 
 #play area
 upper_left_x= (screen_width-play_width)//2
