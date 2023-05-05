@@ -26,9 +26,6 @@ snake_colour = (255, 0, 0)
 
 clock = pygame.time.Clock()
 
-foodx = round(random.randrange(0, 700 - snake_height) / 10.0) * 10.0
-foody = round(random.randrange(0, 700 - snake_height) / 10.0) * 10.0
-
 #creating the window
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Digital Aracde')
@@ -38,11 +35,19 @@ pygame.display.flip()
 
 
 def snake():
-    global width, height, snake_x, snake_y, snake_height, snake_length, x_move, y_move, foodx, foody
+    global width, height, snake_x, snake_y, snake_height, snake_length, x_move, y_move
     running = True
+    newdirection = []
+    direction = []
+
+    #spawning food on a 10/10 grid 
+    foodx = round(random.randrange(width/2-320, width/2+320) / 10.0) * 10.0
+    foody = round(random.randrange(height/2-320, height/2+320) / 10.0) * 10.0
+
     while running: 
         mouse = pygame.mouse.get_pos()
         
+        #functionality for the quit button in the corner 
         if width-180 <= mouse[0] <= width-40 and height-80 <= mouse[1] <= height-40:
             pygame.draw.rect(screen,button_light,[width-180,height-80,140,40])    
         else:
@@ -51,36 +56,65 @@ def snake():
         
         pygame.display.update() 
         
+        
+        #if snake hits the edges of the screen, import losescreen
         if snake_x < width/2-350 or snake_x > width/2+350 or snake_y < height/2-350 or snake_y > height/2+350:
             import losescreen
+
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running=False
+            #functionality for the quit button 
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if width-180 <= mouse[0] <= width-40 and height-80 <= mouse[1] <= height-40:
                     pygame.quit()
                     sys.exit()
+            #makes the snake plan to move in direction of arrow key 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
-                    x_move = -10
-                    y_move = 0
+                    newdirection = 'left'
                 elif event.key == pygame.K_RIGHT:
-                    x_move = 10
-                    y_move = 0
+                    newdirection = 'right'
                 elif event.key == pygame.K_UP:
-                    x_move = 0
-                    y_move = -10
+                    newdirection = 'up'
                 elif event.key == pygame.K_DOWN:
-                    x_move = 0
-                    y_move = 10
-                elif event.key == pygame.K_1:
-                    snake_length += 5
+                    newdirection = 'down'
+
+        #checks to make sure snake is not doubling back on itself
+        if newdirection == 'up' and direction != 'down':
+            direction = 'up'
+        if newdirection == 'down' and direction != 'up':
+            direction = 'down'
+        if newdirection == 'left' and direction != 'right':
+            direction = 'left'
+        if newdirection == 'right' and direction != 'left':
+            direction = 'right'
+        
+        #moves snake along arrow key
+        if direction == 'left':
+            x_move = -snake_height
+            y_move = 0
+        elif direction == 'right':
+            x_move = snake_height
+            y_move = 0
+        elif direction == 'up':
+            x_move = 0
+            y_move = -snake_height
+        elif direction == 'down':
+            x_move = 0
+            y_move = snake_height
+
+        #if the head of the snake is on the food, it grows in length
+        if snake_x < foodx and foodx < snake_x + snake_height and  snake_y < foody and foody < snake_y+snake_height:
+            snake_length += snake_height
        
+        #moving the snake
         snake_x += x_move
         snake_y += y_move
         pygame.draw.rect(screen, black, [width/2-350, height/2-350, 700, 700])
-        pygame.draw.rect(screen, white, [snake_x, snake_y, 20, 20])
+        pygame.draw.rect(screen, white, [snake_x, snake_y, snake_height, snake_length])
+        pygame.draw.rect(screen, red, [foodx, foody, 10, 10])
         
         #cleaning up border
         pygame.draw.rect(screen, background_colour, [0, 0, width, height/2-1050])
@@ -89,7 +123,7 @@ def snake():
         pygame.draw.rect(screen, background_colour, [width/2+350, 0, height/2, width])
 
         #set speed of clock
-        clock.tick(30)
+        clock.tick(5)
 
 
 
