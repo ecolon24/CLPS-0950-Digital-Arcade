@@ -83,30 +83,18 @@ def main_menu():
             #What happens when the tetris button is clicked
                 if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
-                    gamescreen("tetris")
+                    import Tetris
             #What happens when the snake button is clicked
                 if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
-                    gamescreen("snake")
+                    import snake
             #What happens when the space invaders button is clicked
                 if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
-                    gamescreen("space")
+                    import space_invaders
                   
 
-def gamescreen(game):
-    running = True
-    while running: 
-    # Start the appropriate game based on the button clicked
-        if game == "tetris":
-            running = False
-            import Tetris
-        elif game == "snake":
-            running = False
-            import snake
-        elif game == "space":
-            running = False
-            import space_invaders
+
         
         mouse = pygame.mouse.get_pos()
         for event in pygame.event.get():
