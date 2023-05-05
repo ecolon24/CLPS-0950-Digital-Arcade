@@ -46,6 +46,7 @@ snake_body = [  [120, 60],
                [20, 60]
            ]
 
+snake_position = [width/2, height/2]
 
 #spawning food on a 10/10 grid
 foodx = round(random.randrange(width/2-320, width/2+320) / 10.0) * 10.0
@@ -120,28 +121,27 @@ def snake():
       
        #moves snake along arrow key
        if direction == 'left':
-           x_move = -snake_height
-           y_move = 0
+           snake_position[0] -= 20
        elif direction == 'right':
-           x_move = snake_height
-           y_move = 0
+           snake_position[0] += 20
        elif direction == 'up':
-           x_move = 0
-           y_move = -snake_height
+           snake_position[1] -= 20
        elif direction == 'down':
-           x_move = 0
-           y_move = snake_height
-
+           snake_position[1] += 20
 
        #if the head of the snake is on the food, it grows in length
        if snake_x < foodx and foodx < snake_x + snake_height and  snake_y < foody and foody < snake_y+snake_height:
            snake_length += snake_height
      
        #moving the snake
-       snake_x += x_move
-       snake_y += y_move
+       snake_body.append(list(snake_position))
+       snake_body.pop()
+
+       for pos in snake_body:
+        pygame.draw.rect(screen, white,
+                         pygame.Rect(pos[0], pos[1], 10, 10))
+
        pygame.draw.rect(screen, black, [width/2-350, height/2-350, 700, 700])
-       pygame.draw.rect(screen, white, [snake_x, snake_y, snake_height, snake_length])
        pygame.draw.rect(screen, red, [foodx, foody, 10, 10])
       
        #cleaning up border
