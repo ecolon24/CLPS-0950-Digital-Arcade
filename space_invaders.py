@@ -24,7 +24,7 @@ BG = pygame.transform.scale(pygame.image.load(os.path.join("Downloads","Space Sh
 #setup display
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Space Invaders')
-#screen.blit(BG, (0,0))
+screen.blit(BG,(0,0))
 #pygame.display.flip()
 
 #making spaceship images C:\\Users\\DELL\\Downloads\\gfg.png
@@ -33,13 +33,13 @@ player_X = 400
 player_Y = 100
 player_Xchange = 0
 
-def player(x, y):
-    screen.blit(player_image, (x, y))  
+#screen.blit(player_image, (player_X, player_Y))  
 
 
-running = True
-while running:
-    screen.blit(BG, (0,0))
+
+#def player(player_X, player_Y):
+#    screen.blit(player_image, (player_X, player_Y))  
+
     
 
 #screen.blit(player_image, (width/2,height/2))
