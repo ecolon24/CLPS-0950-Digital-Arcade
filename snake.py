@@ -47,9 +47,9 @@ snake_body = [  [600, 400],
 
 snake_position = [width/2, height/2]
 
-#spawning food on a 10/10 grid
-foodx = round(random.randrange(width/2-320, width/2+320) / 10.0) * 10.0
-foody = round(random.randrange(height/2-320, height/2+320) / 10.0) * 10.0
+#spawning food on a 20x20 grid
+foodx = round(random.randrange(width/2-320, width/2+320) / 20.0) * 20.0
+foody = round(random.randrange(height/2-320, height/2+320) / 20.0) * 20.0
 food_position = [foodx, foody]
 food_spawn = True
 
@@ -158,6 +158,3 @@ def snake():
 
 
 snake()
-
-
-
