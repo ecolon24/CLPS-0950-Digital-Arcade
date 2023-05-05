@@ -57,7 +57,7 @@ food_spawn = True
 
 
 def snake():
-   global width, height, snake_x, snake_y, snake_height, snake_length, x_move, y_move
+   global width, height, snake_x, snake_y, snake_height, snake_length, x_move, y_move, foodx, foody
    running = True
    food_spawn = True
    newdirection = []
@@ -83,9 +83,6 @@ def snake():
            running = False
            import losescreen
           
-
-
-
 
        for event in pygame.event.get():
            if event.type == pygame.QUIT:
@@ -136,13 +133,16 @@ def snake():
        #if the head of the snake is on the food, it grows in length
        if snake_position[0] == foodx and snake_position[1] == foody:
             food_spawn = True
+            foodx = round(random.randrange(width/2-320, width/2+320) / 20.0) * 20.0
+            foody = round(random.randrange(height/2-320, height/2+320) / 20.0) * 20.0
        else:
             snake_body.pop()
+
 
        pygame.draw.rect(screen, black, [width/2-350, height/2-350, 700, 700])
 
        for pos in snake_body:
-        pygame.draw.rect(screen, white,[pos[0], pos[1], 20, 20])
+        pygame.draw.rect(screen, white,[pos[0], pos[1], snake_height, snake_length])
 
        if food_spawn == True:
             pygame.draw.rect(screen, red, [foodx, foody, 20, 20])
