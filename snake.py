@@ -38,12 +38,11 @@ screen.fill(background_colour)
 pygame.display.flip()
 
 
-snake_body = [  [120, 60],
-               [100, 60],
-               [80, 60],
-               [60, 60],
-               [40, 60],
-               [20, 60]
+snake_body = [  [600, 400],
+               [580, 400],
+               [560, 400],
+               [540, 400],
+               [520, 400]
            ]
 
 snake_position = [width/2, height/2]
@@ -131,22 +130,21 @@ def snake():
 
        #if the head of the snake is on the food, it grows in length
        if snake_x < foodx and foodx < snake_x + snake_height and  snake_y < foody and foody < snake_y+snake_height:
-           snake_length += snake_height
+           snake_body.pop()
      
        #moving the snake
        snake_body.append(list(snake_position))
-       snake_body.pop()
-
-       for pos in snake_body:
-        pygame.draw.rect(screen, white,
-                         pygame.Rect(pos[0], pos[1], 10, 10))
 
        pygame.draw.rect(screen, black, [width/2-350, height/2-350, 700, 700])
-       pygame.draw.rect(screen, red, [foodx, foody, 10, 10])
+
+       for pos in snake_body:
+        pygame.draw.rect(screen, white,[pos[0], pos[1], 20, 20])
+
+       pygame.draw.rect(screen, red, [foodx, foody, 20, 20])
       
        #cleaning up border
-       pygame.draw.rect(screen, background_colour, [0, 0, width, height/2-1050])
-       pygame.draw.rect(screen, background_colour, [0, 0, height, width/2-1050])
+       pygame.draw.rect(screen, background_colour, [0, 0, width, height/2-350])
+       pygame.draw.rect(screen, background_colour, [0, 0, width/2-350, height])
        pygame.draw.rect(screen, background_colour, [0, height/2+350, width, height/2])
        pygame.draw.rect(screen, background_colour, [width/2+350, 0, height/2, width])
 
