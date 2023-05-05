@@ -82,11 +82,14 @@ def snake():
         pygame.draw.rect(screen, black, [width/2-350, height/2-350, 700, 700])
         pygame.draw.rect(screen, white, [snake_x, snake_y, 20, 20])
         
+        #cleaning up border
+        pygame.draw.rect(screen, background_colour, [0, 0, width, height/2-1050])
+        pygame.draw.rect(screen, background_colour, [0, 0, height, width/2-1050])
+        pygame.draw.rect(screen, background_colour, [0, height/2+350, width, height/2])
+        pygame.draw.rect(screen, background_colour, [width/2+350, 0, height/2, width])
 
+        #set speed of clock
         clock.tick(30)
-
-
-
 
 
 
