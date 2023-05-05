@@ -32,6 +32,19 @@ pygame.display.set_caption('Digital Aracde')
 screen.fill(background_colour)
 pygame.display.flip()
 
+snake_body = [  [120, 60],
+                [100, 60],
+                [80, 60],
+                [60, 60],
+                [40, 60],
+                [20, 60]
+            ]
+
+#spawning food on a 10/10 grid 
+foodx = round(random.randrange(width/2-320, width/2+320) / 10.0) * 10.0
+foody = round(random.randrange(height/2-320, height/2+320) / 10.0) * 10.0
+food_position = [foodx, foody]
+food_spawn = True
 
 
 def snake():
@@ -40,9 +53,6 @@ def snake():
     newdirection = []
     direction = []
 
-    #spawning food on a 10/10 grid 
-    foodx = round(random.randrange(width/2-320, width/2+320) / 10.0) * 10.0
-    foody = round(random.randrange(height/2-320, height/2+320) / 10.0) * 10.0
 
     while running: 
         mouse = pygame.mouse.get_pos()
@@ -129,4 +139,3 @@ def snake():
 
 
 snake()
-
