@@ -99,12 +99,16 @@ def gamescreen(game):
     while running: 
     # Start the appropriate game based on the button clicked
         if game == "tetris":
+            running = False
             import Tetris
         elif game == "snake":
+            running = False
             import snake
         elif game == "space":
+            running = False
             import space_invaders
         
+        mouse = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
