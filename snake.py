@@ -1,8 +1,7 @@
 import pygame
 import sys
 import random
-import arcade
-import losescreen
+#import losescreen
 pygame.init()
 
 
@@ -58,8 +57,8 @@ food_spawn = True
 
 
 
-def snake():
-   global width, height, snake_x, snake_y, snake_height, snake_length, x_move, y_move, foodx, foody
+def game():
+   global width, height, snake_height, snake_length, x_move, y_move, foodx, foody
    running = True
    food_spawn = True
    newdirection = []
@@ -81,9 +80,9 @@ def snake():
       
       
        #if snake hits the edges of the screen, import losescreen
-       if snake_x < width/2-350 or snake_x > width/2+350 or snake_y < height/2-350 or snake_y > height/2+350:
+       if snake_position[0] < 300 or snake_position[0]+snake_height > 900 or snake_position[1] < 100 or snake_position[1]+snake_height > 700:
            running = False
-           losescreen.losescreen() 
+           #losescreen.losescreen() 
           
 
        for event in pygame.event.get():
@@ -95,6 +94,7 @@ def snake():
                    running = False
                    pygame.quit()
                    sys.exit()
+                   
            #makes the snake plan to move in direction of arrow key
            elif event.type == pygame.KEYDOWN:
                if event.key == pygame.K_LEFT:
@@ -141,7 +141,7 @@ def snake():
             snake_body.pop()
 
 
-       pygame.draw.rect(screen, black, [width/2-350, height/2-350, 700, 700])
+       pygame.draw.rect(screen, black, [300, 100, 600, 600])
 
        for pos in snake_body:
         pygame.draw.rect(screen, white,[pos[0], pos[1], snake_height, snake_length])
@@ -151,10 +151,10 @@ def snake():
             
       
        #cleaning up border
-       pygame.draw.rect(screen, background_colour, [0, 0, width, height/2-350])
-       pygame.draw.rect(screen, background_colour, [0, 0, width/2-350, height])
-       pygame.draw.rect(screen, background_colour, [0, height/2+350, width, height/2])
-       pygame.draw.rect(screen, background_colour, [width/2+350, 0, height/2, width])
+       pygame.draw.rect(screen, background_colour, [0, 0, width, 100])
+       pygame.draw.rect(screen, background_colour, [0, 0, 300, height])
+       pygame.draw.rect(screen, background_colour, [900, 0, width/2, height])
+       pygame.draw.rect(screen, red, [0, 700, width, height/2])
 
 
        #set speed of clock
@@ -165,4 +165,4 @@ def snake():
 
 
 
-snake()
+game()

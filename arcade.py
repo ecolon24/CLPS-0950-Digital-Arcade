@@ -89,7 +89,7 @@ def main_menu():
             #What happens when the snake button is clicked
                 if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
-                    snake.snake()
+                    snake.game()
             #What happens when the space invaders button is clicked
                 if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
