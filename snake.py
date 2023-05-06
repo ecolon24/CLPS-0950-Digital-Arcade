@@ -140,6 +140,7 @@ def game():
        else:
             snake_body.pop()
 
+       print(snake_body)
 
        pygame.draw.rect(screen, black, [300, 100, 600, 600])
 
@@ -154,7 +155,7 @@ def game():
        pygame.draw.rect(screen, background_colour, [0, 0, width, 100])
        pygame.draw.rect(screen, background_colour, [0, 0, 300, height])
        pygame.draw.rect(screen, background_colour, [900, 0, width/2, height])
-       pygame.draw.rect(screen, red, [0, 700, width, height/2])
+       pygame.draw.rect(screen, background_colour, [0, 700, width, height/2])
 
 
        #set speed of clock
