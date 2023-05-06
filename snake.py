@@ -1,6 +1,8 @@
 import pygame
 import sys
 import random
+
+
 #import losescreen
 pygame.init()
 
@@ -42,8 +44,6 @@ pygame.display.flip()
 snake_body = [  [600, 400],
                [580, 400],
                [560, 400],
-               [540, 400],
-               [520, 400]
            ]
 
 snake_position = [width/2, height/2]
@@ -54,17 +54,29 @@ foody = round(random.randrange(height/2-320, height/2+320) / 20.0) * 20.0
 food_position = [foodx, foody]
 food_spawn = True
 
+def generate_food():
+    while True:
+        foodx = round(random.randrange(width/2-320, width/2+320) / 20.0) * 20.0
+        foody = round(random.randrange(height/2-320, height/2+320) / 20.0) * 20.0
+                # Check if the generated position is not occupied by the snake's body
+        if (
+            [foodx, foody] not in snake_body and
+            foodx < snake_x - 80 or foodx > snake_x + 80 or
+            foody < snake_y - 80 or foody > snake_y + 80
+            ):
+            break  # Exit the while loop once a valid position is found
 
+    return foodx, foody
 
 
 def game():
-   global width, height, snake_height, snake_length, x_move, y_move, foodx, foody
+   global width, height, snake_height, snake_length, x_move, y_move, foodx,foody
    running = True
    food_spawn = True
    newdirection = []
    direction = []
    snake_score = 2
-
+   foodx, foody = generate_food()
 
    while running:
        mouse = pygame.mouse.get_pos()
@@ -135,21 +147,20 @@ def game():
        #if the head of the snake is on the food, it grows in length
        if snake_position[0] == foodx and snake_position[1] == foody:
             food_spawn = True
-            foodx = round(random.randrange(width/2-320, width/2+320) / 20.0) * 20.0
-            foody = round(random.randrange(height/2-320, height/2+320) / 20.0) * 20.0
             snake_score += 1
+            foodx, foody = generate_food()
        else:
             snake_body.pop()
-
-       print(snake_body)
+    
 
        pygame.draw.rect(screen, black, [300, 100, 600, 600])
 
        for pos in snake_body:
         pygame.draw.rect(screen, white,[pos[0], pos[1], snake_height, snake_length])
-
-       if food_spawn == True:
+        
+       if food_spawn == True: 
             pygame.draw.rect(screen, red, [foodx, foody, 20, 20])
+
             
       
        #cleaning up border
