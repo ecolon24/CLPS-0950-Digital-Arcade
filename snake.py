@@ -63,7 +63,7 @@ def game():
    food_spawn = True
    newdirection = []
    direction = []
-
+   snake_score = 2
 
 
    while running:
@@ -129,14 +129,15 @@ def game():
 
 
        snake_body.insert(0, list(snake_position))
-       for i in range(1, len(snake_body)):
-            snake_body[i] = list(snake_body[i - 1])
+       if len(snake_body) > snake_score:  # Check if the snake has more than 5 segments
+            snake_body.pop()
 
        #if the head of the snake is on the food, it grows in length
        if snake_position[0] == foodx and snake_position[1] == foody:
             food_spawn = True
             foodx = round(random.randrange(width/2-320, width/2+320) / 20.0) * 20.0
             foody = round(random.randrange(height/2-320, height/2+320) / 20.0) * 20.0
+            snake_score += 1
        else:
             snake_body.pop()
 
