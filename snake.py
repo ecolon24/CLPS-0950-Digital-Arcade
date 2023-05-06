@@ -1,6 +1,8 @@
 import pygame
 import sys
 import random
+import arcade
+import losescreen
 pygame.init()
 
 
@@ -81,7 +83,7 @@ def snake():
        #if snake hits the edges of the screen, import losescreen
        if snake_x < width/2-350 or snake_x > width/2+350 or snake_y < height/2-350 or snake_y > height/2+350:
            running = False
-           import losescreen
+           losescreen.losescreen() 
           
 
        for event in pygame.event.get():
