@@ -17,6 +17,7 @@ def main_menu():
     button_light = (170,170,170)
     button_dark = (140,140,140)
     black = (0,0,0)
+    #tetris = pygame.image.load('Typical_Tetris_Game.svg.png')
     #myImage = Image.open("MacintoshHD/Users/EvelynKrall/Documents/GitHub/CLPS-0950-Digital-Arcade/Typical_Tetris_Game.svg.png")
     #myImage = Image.open('./Images_folder')
     #url = 'https://github.com/ecolon24/CLPS-0950-Digital-Arcade/blob/main/Typical_Tetris_Game.svg.png'
@@ -72,6 +73,7 @@ def main_menu():
         screen.blit(tetristext , (width/2-232,height/2-50))
         screen.blit(snaketext , (width/2-26,height/2-50))
         screen.blit(spacetext , (width/2+150,height/2-50))
+        #screen.blit(tetris, (0,0), (width/2, height/2))
         pygame.display.update()  
 
         for event in pygame.event.get():
