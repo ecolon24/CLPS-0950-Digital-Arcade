@@ -8,42 +8,42 @@ import snake
 #import space_invaders
 #import Tetris
 
-
-pygame.init()
-
-#I want to get an image for the background of the start screen
-# but I'm not sure how to do that
-background_colour = (204,229,255)
-button_light = (170,170,170)
-button_dark = (140,140,140)
-black = (0,0,0)
-#myImage = Image.open("MacintoshHD/Users/EvelynKrall/Documents/GitHub/CLPS-0950-Digital-Arcade/Typical_Tetris_Game.svg.png")
-#myImage = Image.open('./Images_folder')
-#url = 'https://github.com/ecolon24/CLPS-0950-Digital-Arcade/blob/main/Typical_Tetris_Game.svg.png'
-
-#response = requests.get(url)
-#img = Image.open(BytesIO(response.content))
-
-
-
-#dimensions of window
-(width, height) = (1200, 800)
-
-#creating the window
-screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption('Digital Aracde')
-screen.fill(background_colour)
-pygame.display.flip()
-
-#text set up 
-textfont = pygame.font.SysFont('Arial',18)
-quittext = textfont.render('Quit' , True , black)
-tetristext = textfont.render('Tetris' , True , black)
-snaketext = textfont.render('Snake' , True , black)
-spacetext = textfont.render('Space Invaders' , True , black)
-
-
 def main_menu():
+    pygame.init()
+
+    #I want to get an image for the background of the start screen
+    # but I'm not sure how to do that
+    background_colour = (204,229,255)
+    button_light = (170,170,170)
+    button_dark = (140,140,140)
+    black = (0,0,0)
+    #myImage = Image.open("MacintoshHD/Users/EvelynKrall/Documents/GitHub/CLPS-0950-Digital-Arcade/Typical_Tetris_Game.svg.png")
+    #myImage = Image.open('./Images_folder')
+    #url = 'https://github.com/ecolon24/CLPS-0950-Digital-Arcade/blob/main/Typical_Tetris_Game.svg.png'
+
+    #response = requests.get(url)
+    #img = Image.open(BytesIO(response.content))
+
+
+
+    #dimensions of window
+    (width, height) = (1200, 800)
+
+    #creating the window
+    screen = pygame.display.set_mode((width, height))
+    pygame.display.set_caption('Digital Aracde')
+    screen.fill(background_colour)
+    pygame.display.flip()
+
+    #text set up 
+    textfont = pygame.font.SysFont('Arial',18)
+    quittext = textfont.render('Quit' , True , black)
+    tetristext = textfont.render('Tetris' , True , black)
+    snaketext = textfont.render('Snake' , True , black)
+    spacetext = textfont.render('Space Invaders' , True , black)
+
+
+
     running = True
     while running: 
         mouse = pygame.mouse.get_pos()
@@ -109,3 +109,5 @@ def main_menu():
                     sys.exit()
 
   
+if __name__ == "__main__":
+	main_menu()
