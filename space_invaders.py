@@ -21,6 +21,7 @@ aqua = (0,255,255)
 fushia = (255,0,255)
 BG = pygame.transform.scale(pygame.image.load(os.path.join("Downloads","Space Shooter Pics","assets", "background.jpeg")), (width, height))
 
+
 #setup display
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Space Invaders')
