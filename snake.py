@@ -1,81 +1,75 @@
 import pygame
 import sys
 import random
-
-
-#import losescreen
-pygame.init()
-
-
-#dimensions of window
-(width, height) = (1200, 800)
-background_colour = (204,229,255)
-button_light = (170,170,170)
-button_dark = (140,140,140)
-black = (0,0,0)
-white = (255,255,255)
-red = (255,0,0)
-
-
-textfont = pygame.font.SysFont('Arial',18)
-bigfont = pygame.font.SysFont('Arial',30)
-quittext = textfont.render('Quit' , True , black)
-
-
-snake_height = 20
-snake_length = 20
-snake_x = width // 2 - snake_height // 2
-snake_y = height // 2 - snake_length // 2
-x_move = 0
-y_move = 0
-snake_colour = (255, 0, 0)
-
-
-clock = pygame.time.Clock()
-
-
-#creating the window
-screen = pygame.display.set_mode((width, height))
-pygame.display.set_caption('Digital Aracde')
-screen.fill(background_colour)
-pygame.display.flip()
-
-
-snake_body = [  [600, 400],
-               [580, 400],
-               [560, 400],
-           ]
-
-snake_position = [width/2, height/2]
-
-#spawning food on a 20x20 grid
-foodx = round(random.randrange(width/2-320, width/2+320) / 20.0) * 20.0
-foody = round(random.randrange(height/2-320, height/2+320) / 20.0) * 20.0
-food_position = [foodx, foody]
-food_spawn = True
-
-def generate_food():
-    while True:
-        foodx = round(random.randrange(width/2-320, width/2+320) / 20.0) * 20.0
-        foody = round(random.randrange(height/2-320, height/2+320) / 20.0) * 20.0
-                # Check if the generated position is not occupied by the snake's body
-        if ([foodx, foody] not in snake_body and (
-            foodx < snake_x - 20 or foodx > snake_x + 20 or
-            foody < snake_y - 20 or foody > snake_y + 20)):
-            break  # Exit the while loop once a valid position is found
-
-    return foodx, foody
+import losescreen
 
 def game():
-   global width, height, snake_height, snake_length, x_move, y_move, foodx,foody
-   running = True
-   food_spawn = True
-   newdirection = []
-   direction = []
-   snake_score = 2
-   foodx, foody = generate_food()
+    pygame.init()
 
-   while running:
+
+    #dimensions of window
+    (width, height) = (1200, 800)
+    background_colour = (204,229,255)
+    button_light = (170,170,170)
+    button_dark = (140,140,140)
+    black = (0,0,0)
+    white = (255,255,255)
+    red = (255,0,0)
+
+
+    textfont = pygame.font.SysFont('Arial',18)
+    quittext = textfont.render('Quit' , True , black)
+
+
+    snake_height = 20
+    snake_length = 20
+    snake_x = width // 2 - snake_height // 2
+    snake_y = height // 2 - snake_length // 2
+
+    clock = pygame.time.Clock()
+
+
+    #creating the window
+    screen = pygame.display.set_mode((width, height))
+    pygame.display.set_caption('Digital Aracde')
+    screen.fill(background_colour)
+    pygame.display.flip()
+
+
+    snake_body = [  [600, 400],
+                    [580, 400],
+                    [560, 400],
+                ]
+
+    snake_position = [width/2, height/2]
+
+    #spawning food on a 20x20 grid
+    foodx = round(random.randrange(width/2-300, width/2+300) / 20.0) * 20.0
+    foody = round(random.randrange(height/2-300, height/2+300) / 20.0) * 20.0
+    food_spawn = True
+
+    def generate_food():
+        while True:
+            foodx = round(random.randrange(width/2-300, width/2+300) / 20.0) * 20.0
+            foody = round(random.randrange(height/2-300, height/2+300) / 20.0) * 20.0
+                # Check if the generated position is not occupied by the snake's body
+            if ([foodx, foody] not in snake_body and (
+                foodx < snake_x - 20 or foodx > snake_x + 20 or
+                foody < snake_y - 20 or foody > snake_y + 20)):
+                break  # Exit the while loop once a valid position is found
+
+        return foodx, foody
+
+
+   
+    running = True
+    food_spawn = True
+    newdirection = []
+    direction = []
+    snake_score = 2
+    foodx, foody = generate_food()
+
+    while running:
        mouse = pygame.mouse.get_pos()
       
        #functionality for the quit button in the corner
@@ -91,7 +85,7 @@ def game():
        #if snake hits the edges of the screen, import losescreen
        if snake_position[0] < 300 or snake_position[0]+snake_height > 900 or snake_position[1] < 100 or snake_position[1]+snake_height > 700:
            running = False
-           #losescreen.losescreen() 
+           losescreen.losing() 
           
 
        for event in pygame.event.get():
@@ -168,10 +162,3 @@ def game():
 
        #set speed of clock
        clock.tick(5)
-
-
-
-
-
-
-game()
