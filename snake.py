@@ -155,8 +155,7 @@ def game():
        for pos in snake_body:
         pygame.draw.rect(screen, white,[pos[0], pos[1], snake_height, snake_length])
         
-       if food_spawn == True: 
-            pygame.draw.rect(screen, red, [foodx, foody, 20, 20])
+
 
             
       
@@ -166,7 +165,9 @@ def game():
        pygame.draw.rect(screen, background_colour, [900, 0, width/2, height])
        pygame.draw.rect(screen, background_colour, [0, 700, width, height/2])
 
-
+       if food_spawn == True: 
+            pygame.draw.rect(screen, red, [foodx, foody, 20, 20])
+            
        #set speed of clock
        clock.tick(5)
 
