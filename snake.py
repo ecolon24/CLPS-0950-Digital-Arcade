@@ -26,6 +26,7 @@ def game():
     snake_x = width // 2 - snake_height // 2
     snake_y = height // 2 - snake_length // 2
 
+
     clock = pygame.time.Clock()
 
 
@@ -46,6 +47,7 @@ def game():
     #spawning food on a 20x20 grid
     foodx = round(random.randrange(width/2-300, width/2+300) / 20.0) * 20.0
     foody = round(random.randrange(height/2-300, height/2+300) / 20.0) * 20.0
+    food_position = [foodx, foody]
     food_spawn = True
 
     def generate_food():
@@ -162,3 +164,6 @@ def game():
 
        #set speed of clock
        clock.tick(5)
+
+if __name__ == "__main__":
+	game()
