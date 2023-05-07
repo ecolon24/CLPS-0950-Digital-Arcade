@@ -1,7 +1,7 @@
 import pygame
 import sys
 import random
-
+#import losescreen
 
 #import losescreen
 pygame.init()
@@ -59,11 +59,9 @@ def generate_food():
         foodx = round(random.randrange(width/2-320, width/2+320) / 20.0) * 20.0
         foody = round(random.randrange(height/2-320, height/2+320) / 20.0) * 20.0
                 # Check if the generated position is not occupied by the snake's body
-        if (
-            [foodx, foody] not in snake_body and
-            foodx < snake_x - 80 or foodx > snake_x + 80 or
-            foody < snake_y - 80 or foody > snake_y + 80
-            ):
+        if ([foodx, foody] not in snake_body and (
+            foodx < snake_x - 20 or foodx > snake_x + 20 or
+            foody < snake_y - 20 or foody > snake_y + 20)):
             break  # Exit the while loop once a valid position is found
 
     return foodx, foody
@@ -94,7 +92,7 @@ def game():
        #if snake hits the edges of the screen, import losescreen
        if snake_position[0] < 300 or snake_position[0]+snake_height > 900 or snake_position[1] < 100 or snake_position[1]+snake_height > 700:
            running = False
-           #losescreen.losescreen() 
+           #losescreen.losing() 
           
 
        for event in pygame.event.get():
@@ -175,7 +173,3 @@ def game():
 
 
 
-
-
-
-game()

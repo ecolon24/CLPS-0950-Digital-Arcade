@@ -109,4 +109,3 @@ def main_menu():
                     sys.exit()
 
   
-main_menu()
