@@ -18,6 +18,7 @@ def main_menu():
     button_light = (170,170,170)
     button_dark = (140,140,140)
     black = (0,0,0)
+    arcade_background = pygame.image.load("Documents/GitHub/CLPS-0950-Digital-Arcade/arcadebackground.jpeg")
 
 
     #dimensions of window
@@ -26,7 +27,7 @@ def main_menu():
     #creating the window
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption('Digital Aracde')
-    screen.fill(background_colour)
+    screen.blit(arcade_background, (0,0))
     pygame.display.flip()
 
     #text set up 

@@ -4,38 +4,39 @@ def game():
     pygame.init()
 
     
-    background_colour = (204,229,255)
+    #background_colour = (204,229,255)
     button_light = (170,170,170)
     button_dark = (140,140,140)
     black = (0,0,0)
+    background = pygame.image.load("Documents/GitHub/CLPS-0950-Digital-Arcade/pongbackground.png")
 
 
     #dimensions of window
-    (width, height) = (1200, 800)
+    (width, height) = (960, 720)
 
     #creating the window
     screen = pygame.display.set_mode((width, height))
     pygame.display.set_caption('Pong Question Screen')
-    screen.fill(background_colour)
+    screen.blit(background, (0,0))
     pygame.display.flip()
 
     #text set up 
-    textfont = pygame.font.SysFont('Arial',18)
+    textfont = pygame.font.SysFont('Arial',16)
     quittext = textfont.render('Quit' , True , black)
-    tetristext = textfont.render('One Player' , True , black)
-    pongtext = textfont.render('Two Players' , True , black)
+    onetext = textfont.render('One Player' , True , black)
+    twotext = textfont.render('Two Players' , True , black)
 
 
 
     running = True
     while running: 
         mouse = pygame.mouse.get_pos()
-    #code for making tetris button lighter when hovered over it 
+    #code for making one player button lighter when hovered over it 
         if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
             pygame.draw.rect(screen,button_light,[width/2-280,height/2-60,140,40])    
         else:
             pygame.draw.rect(screen,button_dark,[width/2-280,height/2-60,140,40])
-    #code for making space invaders button lighter when hovered over it 
+    #code for making two player button lighter when hovered over it 
         if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
             pygame.draw.rect(screen,button_light,[width/2+140,height/2-60,140,40])    
         else:
@@ -47,8 +48,8 @@ def game():
             pygame.draw.rect(screen,button_dark,[width/2-70,height/2+20,140,40])
       
         screen.blit(quittext , (width/2-20,height/2+30))
-        screen.blit(tetristext , (width/2-232,height/2-50))
-        screen.blit(pongtext , (width/2+190,height/2-50))
+        screen.blit(onetext , (width/2-250,height/2-50))
+        screen.blit(twotext , (width/2+170,height/2-50))
         pygame.display.update()  
 
         for event in pygame.event.get():
