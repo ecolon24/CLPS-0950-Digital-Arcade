@@ -1,8 +1,56 @@
 import pygame
 import sys
+import time
 def game():
     pygame.init()
+    white = (255,255,255)
     def twoplayer():
+
+        run1 = True
+        while run1:
+            screen.fill(white)
+            threetext = textfont.render('3' , True , (0,0,0))
+            time.sleep(3)
+            pygame.display.flip()
+            run1=False
+        
+        
+       
+        #countdown = []
+        #threetext = textfont.render('3' , True , white)
+        #twotext = textfont.render('2', True, white)
+        #onetext = textfont.render('1', True, white)
+        #screen.blit(threetext)
+        #time.sleep(1)
+        #pygame.display.flip()
+
+        #run1 = True
+       # while run1:
+            #countdown.append(threetext)
+            #screen.blit(countdown)
+            #run1= False
+        
+        #run1 = True
+        #while run1:
+            #imgcountdown = ()
+        #    three = pygame.image.load("Documents/GitHub/CLPS-0950-Digital-Arcade/three.png")
+            #imgcountdown.append(three)
+        #    screen.blit(three)
+        #    time.sleep(1)
+        #    three = ()
+        #    run1=False
+
+       # run2 = True
+       # while run2:
+       #    two = pygame.image.load("Documets/GitHub/CLPS-0950-Digital-Arcade/two.png")
+       #    #imgcountdown.append(two)
+       #     screen.blit(two)
+       #     time.sleep(1)
+       #    two = ()
+       #     #imgcountdown.clear()
+        #    run2=False
+
+        
         wwidth, wheight = 700, 500
         WIN = pygame.display.set_mode((wwidth, wheight))
         pygame.display.set_caption("Pong")
