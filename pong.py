@@ -3,67 +3,67 @@ import sys
 def game():
     pygame.init()
 
-    def introduction():
-        button_light = (170,170,170)
-        button_dark = (140,140,140)
-        background_colour = (204,229,255)
-        (width, height) = (1200, 800)
-        black = (0,0,0)
+    
+    button_light = (170,170,170)
+    button_dark = (140,140,140)
+    background_colour = (204,229,255)
+    (width, height) = (1200, 800)
+    black = (0,0,0)
 
         #creating the window
-        screen = pygame.display.set_mode((width, height))
-        pygame.display.set_caption('One or Two Players Pong')
-        screen.fill(background_colour)
-        pygame.display.flip()
+    screen = pygame.display.set_mode((width, height))
+    pygame.display.set_caption('One or Two Players Pong')
+    screen.fill(background_colour)
+    pygame.display.flip()
 
         #text set up 
-        textfont = pygame.font.SysFont('Arial',18)
-        onetext = textfont.render('One Player' , True , black)
-        twotext = textfont.render('Two Player' , True , black)
+    textfont = pygame.font.SysFont('Arial',18)
+    onetext = textfont.render('One Player' , True , black)
+    twotext = textfont.render('Two Player' , True , black)
     
-        running = True
-        while running: 
-            mouse = pygame.mouse.get_pos()
-    #code for making tetris button lighter when hovered over it 
-            if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
-                pygame.draw.rect(screen,button_light,[width/2-280,height/2-60,140,40])    
-            else:
-                pygame.draw.rect(screen,button_dark,[width/2-280,height/2-60,140,40])
-    #code for making snake button lighter when hovered over it 
-            if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
-                pygame.draw.rect(screen,button_light,[width/2-70,height/2-60,140,40])    
-            else:
-                pygame.draw.rect(screen,button_dark,[width/2-70,height/2-60,140,40])
-
-        screen.blit(onetext , (width/2-20,height/2+30))
-        screen.blit(twotext , (width/2-232,height/2-50))
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if width/2-70 <= mouse[0] <= width/2+70 and height/2+20 <= mouse[1] <= height/2+60:
-                    pygame.quit()
-                    sys.exit()
-            #What happens when the tetris button is clicked
-                if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
-                    running = False
-                    twoplayer()
-            #What happens when the snake button is clicked
-                if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
-                    running = False
-                    twoplayer()
-
+    running = True
+    while running: 
         mouse = pygame.mouse.get_pos()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+    #code for making tetris button lighter when hovered over it 
+        if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
+            pygame.draw.rect(screen,button_light,[width/2-280,height/2-60,140,40])    
+        else:
+            pygame.draw.rect(screen,button_dark,[width/2-280,height/2-60,140,40])
+    #code for making snake button lighter when hovered over it 
+        if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
+            pygame.draw.rect(screen,button_light,[width/2-70,height/2-60,140,40])    
+        else:
+            pygame.draw.rect(screen,button_dark,[width/2-70,height/2-60,140,40])
+
+    screen.blit(onetext , (width/2-20,height/2+30))
+    screen.blit(twotext , (width/2-232,height/2-50))
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if width/2-70 <= mouse[0] <= width/2+70 and height/2+20 <= mouse[1] <= height/2+60:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if width-280 <= mouse[0] <= width-140 and height-80 <= mouse[1] <= height-40:
-                    pygame.quit()
-                    sys.exit()
+            #What happens when the tetris button is clicked
+            if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
+                running = False
+                twoplayer()
+            #What happens when the snake button is clicked
+            if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
+                running = False
+                twoplayer()
+
+    mouse = pygame.mouse.get_pos()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if width-280 <= mouse[0] <= width-140 and height-80 <= mouse[1] <= height-40:
+                pygame.quit()
+                sys.exit()
 
 
 
