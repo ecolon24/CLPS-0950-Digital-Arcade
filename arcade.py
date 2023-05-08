@@ -17,7 +17,10 @@ def main_menu():
     background_colour = (204,229,255)
     button_light = (170,170,170)
     button_dark = (140,140,140)
+    button_dark2 = (153,50,204)
+    button_light2 = (186,85,211)
     black = (0,0,0)
+    white = (255,255,255)
     arcade_background = pygame.image.load("Documents/GitHub/CLPS-0950-Digital-Arcade/arcadebackground.jpeg")
 
 
@@ -32,10 +35,10 @@ def main_menu():
 
     #text set up 
     textfont = pygame.font.SysFont('Arial',18)
-    quittext = textfont.render('Quit' , True , black)
-    tetristext = textfont.render('Tetris' , True , black)
-    snaketext = textfont.render('Snake' , True , black)
-    pongtext = textfont.render('Pong' , True , black)
+    quittext = textfont.render('Quit' , True , white)
+    tetristext = textfont.render('Tetris' , True , white)
+    snaketext = textfont.render('Snake' , True , white)
+    pongtext = textfont.render('Pong' , True , white)
 
 
 
@@ -44,24 +47,24 @@ def main_menu():
         mouse = pygame.mouse.get_pos()
     #code for making tetris button lighter when hovered over it 
         if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
-            pygame.draw.rect(screen,button_light,[width/2-280,height/2-60,140,40])    
+            pygame.draw.rect(screen,button_light2,[width/2-280,height/2-60,140,40])    
         else:
-            pygame.draw.rect(screen,button_dark,[width/2-280,height/2-60,140,40])
+            pygame.draw.rect(screen,button_dark2,[width/2-280,height/2-60,140,40])
     #code for making snake button lighter when hovered over it 
         if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
-            pygame.draw.rect(screen,button_light,[width/2-70,height/2-60,140,40])    
+            pygame.draw.rect(screen,button_light2,[width/2-70,height/2-60,140,40])    
         else:
-            pygame.draw.rect(screen,button_dark,[width/2-70,height/2-60,140,40])
+            pygame.draw.rect(screen,button_dark2,[width/2-70,height/2-60,140,40])
     #code for making space invaders button lighter when hovered over it 
         if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
-            pygame.draw.rect(screen,button_light,[width/2+140,height/2-60,140,40])    
+            pygame.draw.rect(screen,button_light2,[width/2+140,height/2-60,140,40])    
         else:
-            pygame.draw.rect(screen,button_dark,[width/2+140,height/2-60,140,40])
+            pygame.draw.rect(screen,button_dark2,[width/2+140,height/2-60,140,40])
     #code for making quit button lighter when hovered over it 
         if width/2-70 <= mouse[0] <= width/2+70 and height/2+20 <= mouse[1] <= height/2+60:
-            pygame.draw.rect(screen,button_light,[width/2-70,height/2+20,140,40])        
+            pygame.draw.rect(screen,button_light2,[width/2-70,height/2+20,140,40])        
         else:
-            pygame.draw.rect(screen,button_dark,[width/2-70,height/2+20,140,40])
+            pygame.draw.rect(screen,button_dark2,[width/2-70,height/2+20,140,40])
       
         screen.blit(quittext , (width/2-20,height/2+30))
         screen.blit(tetristext , (width/2-232,height/2-50))
