@@ -2,6 +2,7 @@ import pygame
 import sys
 import time
 import turtle
+from random import randint
 
 def game():
     pygame.init()
@@ -32,7 +33,26 @@ def game():
         wwidth, wheight = 700, 500
         screen = pygame.display.set_mode((wwidth, wheight))
         pygame.display.set_caption("Single Player Pong Game")
-        FPS = 70
+        black = (0,0,0)
+        white = (255,255,255)
+        FPS = pygame.time.Clock()
+
+        def show():
+            FPS.tick(60)
+            screen.fill(black)
+
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+
+
+            pygame.display.update()
+
+ 
+
+
+
         
 
     def twoplayer():
@@ -52,8 +72,8 @@ def game():
 
         screen.blit(backgroundinstructions, (0,0))
         pygame.display.update()
-        time.sleep(5)
-        
+        time.sleep(7)
+
         screen.blit(background3, (0,0))
         pygame.display.update()
         time.sleep(1)
@@ -84,9 +104,9 @@ def game():
         winscore = 6
 
 
-        class Paddle:
-            COLOR = purpleblue
-            VEL = 4
+        class player:
+            color = purpleblue
+            #speed = 4
 
             def __init__(self, x, y, width, height):
                 self.x = self.original_x = x
@@ -94,24 +114,35 @@ def game():
                 self.width = width
                 self.height = height
 
-            def draw(self, win):
-                pygame.draw.rect(
-                    win, self.COLOR, (self.x, self.y, self.width, self.height))
+            def show(self):
+                pygame.draw.rect(screen, self.color, self.x, self.y, self.width, self.height)
 
-            def move(self, up=True):
-                if up:
-                    self.y -= self.VEL
-                else:
-                    self.y += self.VEL
+            def playerup(self, spacing):
+                self.rect.y -= spacing
+                if self.rect.y <0:
+                    self.rect.y =0
+            
+            def playerdown(self, spacing):
+                self.rect.y += spacing
+                if self.rect.y > 400:
+                    self.rect.y =400
+
+                
+
+            #def playermove(self, moveup=True):
+                #if moveup:
+                   # self.y -= self.speed
+                #else:
+                    #self.y += self.speed
 
             def reset(self):
                 self.x = self.original_x
                 self.y = self.original_y
 
 
-        class Ball:
+        class Ball(pygame.sprite.Sprite):
             MAX_VEL = 5
-            COLOR = white
+            color = white
 
             def __init__(self, x, y, radius):
                 self.x = self.original_x = x
@@ -120,8 +151,8 @@ def game():
                 self.x_vel = self.MAX_VEL
                 self.y_vel = 0
 
-            def draw(self, win):
-                pygame.draw.circle(win, self.COLOR, (self.x, self.y), self.radius)
+            def show(self):
+                pygame.draw.circle(screen, self.color, (self.x, self.y), self.radius)
 
             def move(self):
                 self.x += self.x_vel
@@ -199,9 +230,9 @@ def game():
         run = True
         clock = pygame.time.Clock()
 
-        left_paddle = Paddle(10, wheight//2 - pheight //
+        left_paddle = player(10, wheight//2 - pheight //
                             2, pwidth, pheight)
-        right_paddle = Paddle(wwidth - 10 - pwidth, wheight //
+        right_paddle = player(wwidth - 10 - pwidth, wheight //
                             2 - pheight//2, pwidth, pheight)
         ball = Ball(wwidth // 2, wheight // 2, ballsize)
 
@@ -233,10 +264,10 @@ def game():
             won = False
             if left_score >= winscore:
                 won = True
-                win_text = "Left Player Won!"
+                win_text = "Left Wins!"
             elif right_score >= winscore:
                 won = True
-                win_text = "Right Player Won!"
+                win_text = "Right Wins!"
 
             if won:
                 text = SCORE_FONT.render(win_text, 1, white)
