@@ -37,15 +37,18 @@ def game():
         white = (255,255,255)
         FPS = pygame.time.Clock()
 
+        player = pygame.Rect(275,450,100,10)
+
         def show():
             FPS.tick(60)
             screen.fill(black)
+            pygame.draw.rect(screen,white,player)
 
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-
+            show()
 
             pygame.display.update()
 
