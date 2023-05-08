@@ -1,21 +1,17 @@
 import pygame
 import sys
 import time
+import turtle
+
 def game():
     pygame.init()
-    white = (255,255,255)
-    def twoplayer():
-        
-        #run1 = True
-        #while run1:
-        (width, height) = (965, 590)
+    def oneplayer():
 
-            #creating the window
+        (width, height) = (965, 590)
         pygame.display.update()
         screen = pygame.display.set_mode((width, height))
         pygame.display.set_caption('COUNTDOWN')
         pygame.display.update() 
-
         background3 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/3.png")
         background2 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/2.png")
         background1 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/1.png")
@@ -31,24 +27,61 @@ def game():
         screen.blit(background1, (0,0))
         pygame.display.update()
         time.sleep(1)
+
+
+        wwidth, wheight = 700, 500
+        screen = pygame.display.set_mode((wwidth, wheight))
+        pygame.display.set_caption("Single Player Pong Game")
+        FPS = 70
+        
+
+    def twoplayer():
+        white = (255,255,255)
+        
+        #countdown 
+        (width, height) = (965, 590)
+        pygame.display.update()
+        screen = pygame.display.set_mode((width, height))
+        pygame.display.set_caption('COUNTDOWN')
+        pygame.display.update() 
+        backgroundinstructions = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/instructions2.png")
+        background3 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/3.png")
+        background2 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/2.png")
+        background1 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/1.png")
+
+
+        screen.blit(backgroundinstructions, (0,0))
+        pygame.display.update()
+        time.sleep(5)
+        
+        screen.blit(background3, (0,0))
+        pygame.display.update()
+        time.sleep(1)
+        
+        screen.blit(background2, (0,0))
+        pygame.display.update()
+        time.sleep(1)
+       
+        screen.blit(background1, (0,0))
+        pygame.display.update()
+        time.sleep(1)
            
 
-        
+        #actual game for two players! 
         wwidth, wheight = 700, 500
-        WIN = pygame.display.set_mode((wwidth, wheight))
-        pygame.display.set_caption("Pong")
+        screen = pygame.display.set_mode((wwidth, wheight))
+        pygame.display.set_caption("Two Player Pong Game")
+        FPS = 70
 
-        FPS = 60
-
-        WHITE = (255, 255, 255)
+        white = (255, 255, 255)
         purpleblue = (123,104,238)
-        BLACK = (0, 0, 0)
+        black = (0, 0, 0)
 
-        PADDLE_WIDTH, PADDLE_HEIGHT = 20, 100
-        BALL_RADIUS = 7
+        pwidth, pheight = 20, 90
+        ballsize = 6
 
         SCORE_FONT = pygame.font.SysFont("comicsans", 50)
-        WINNING_SCORE = 10
+        winscore = 6
 
 
         class Paddle:
@@ -78,7 +111,7 @@ def game():
 
         class Ball:
             MAX_VEL = 5
-            COLOR = WHITE
+            COLOR = white
 
             def __init__(self, x, y, radius):
                 self.x = self.original_x = x
@@ -102,10 +135,10 @@ def game():
 
 
         def draw(win, paddles, ball, left_score, right_score):
-            win.fill(BLACK)
+            win.fill(black)
 
-            left_score_text = SCORE_FONT.render(f"{left_score}", 1, WHITE)
-            right_score_text = SCORE_FONT.render(f"{right_score}", 1, WHITE)
+            left_score_text = SCORE_FONT.render(f"{left_score}", 1, white)
+            right_score_text = SCORE_FONT.render(f"{right_score}", 1, white)
             win.blit(left_score_text, (wwidth//4 - left_score_text.get_width()//2, 20))
             win.blit(right_score_text, (wwidth * (3/4) -
                                         right_score_text.get_width()//2, 20))
@@ -116,7 +149,7 @@ def game():
             for i in range(10, wheight, wheight//20):
                 if i % 2 == 1:
                     continue
-                pygame.draw.rect(win, WHITE, (wwidth//2 - 5, i, 10, wheight//20))
+                pygame.draw.rect(win, white, (wwidth//2 - 5, i, 10, wheight//20))
 
             ball.draw(win)
             pygame.display.update()
@@ -166,18 +199,18 @@ def game():
         run = True
         clock = pygame.time.Clock()
 
-        left_paddle = Paddle(10, wheight//2 - PADDLE_HEIGHT //
-                            2, PADDLE_WIDTH, PADDLE_HEIGHT)
-        right_paddle = Paddle(wwidth - 10 - PADDLE_WIDTH, wheight //
-                            2 - PADDLE_HEIGHT//2, PADDLE_WIDTH, PADDLE_HEIGHT)
-        ball = Ball(wwidth // 2, wheight // 2, BALL_RADIUS)
+        left_paddle = Paddle(10, wheight//2 - pheight //
+                            2, pwidth, pheight)
+        right_paddle = Paddle(wwidth - 10 - pwidth, wheight //
+                            2 - pheight//2, pwidth, pheight)
+        ball = Ball(wwidth // 2, wheight // 2, ballsize)
 
         left_score = 0
         right_score = 0
 
         while run:
             clock.tick(FPS)
-            draw(WIN, [left_paddle, right_paddle], ball, left_score, right_score)
+            draw(screen, [left_paddle, right_paddle], ball, left_score, right_score)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -198,16 +231,16 @@ def game():
                 ball.reset()
 
             won = False
-            if left_score >= WINNING_SCORE:
+            if left_score >= winscore:
                 won = True
                 win_text = "Left Player Won!"
-            elif right_score >= WINNING_SCORE:
+            elif right_score >= winscore:
                 won = True
                 win_text = "Right Player Won!"
 
             if won:
-                text = SCORE_FONT.render(win_text, 1, WHITE)
-                WIN.blit(text, (wwidth//2 - text.get_width() //
+                text = SCORE_FONT.render(win_text, 1, white)
+                screen.blit(text, (wwidth//2 - text.get_width() //
                                 2, wheight//2 - text.get_height()//2))
                 pygame.display.update()
                 pygame.time.delay(5000)
@@ -220,7 +253,9 @@ def game():
         pygame.quit()
 
     
-    #background_colour = (204,229,255)
+
+
+    #single player or two player
     button_light = (170,170,170)
     button_dark = (140,140,140)
     black = (0,0,0)
@@ -276,15 +311,13 @@ def game():
                 if width/2-70 <= mouse[0] <= width/2+70 and height/2+20 <= mouse[1] <= height/2+60:
                     pygame.quit()
                     sys.exit()
-            #What happens when the tetris button is clicked
+            #What happens when the oneplayer button is clicked
                 if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
-                    
-                    twoplayer()
-            #What happens when the space invaders button is clicked
+                    oneplayer()
+            #What happens when the twoplayer button is clicked
                 if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
-                    
                     twoplayer()
                     
                   

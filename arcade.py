@@ -12,8 +12,7 @@ import pong
 def main_menu():
     pygame.init()
 
-    #I want to get an image for the background of the start screen
-    # but I'm not sure how to do that
+   
     background_colour = (204,229,255)
     button_light = (170,170,170)
     button_dark = (140,140,140)
