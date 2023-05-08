@@ -38,8 +38,8 @@ def game():
         FPS = pygame.time.Clock()
 
         speed = 5
-        ballx = 7
-        bally = 7
+        ballx = 3
+        bally = 3
 
         player = pygame.Rect(275,450,100,10)
         ball = pygame.Rect(290,290,10,10)
@@ -61,7 +61,6 @@ def game():
                     player.x = 5
 
 
-
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -70,10 +69,17 @@ def game():
             ball.x += ballx
             ball.y += bally
 
-            if ball.top <= 0 or ball.bottom >= 700:
-                bally += -1
-            if ball.left <= 0 or ball.right >= 500:
-                ballx += -1
+            #ball.direction = 1,1
+            #ball.speed = 7
+
+            if ball.top <= 0:
+                bally += 1 
+            if ball.bottom >= wheight:
+                bally -= 1
+            if ball.left <= 0:
+                ballx += 1
+            if ball.right >= wwidth:
+                ballx -= 1
 
             keys = pygame.key.get_pressed()
             show()
