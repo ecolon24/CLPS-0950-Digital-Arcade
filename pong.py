@@ -5,14 +5,36 @@ def game():
     pygame.init()
     white = (255,255,255)
     def twoplayer():
+        
+        #run1 = True
+        #while run1:
+        (width, height) = (965, 590)
 
-        run1 = True
-        while run1:
-            screen.fill(white)
-            threetext = textfont.render('3' , True , (0,0,0))
-            time.sleep(3)
-            pygame.display.flip()
-            run1=False
+            #creating the window
+        pygame.display.update()
+        screen = pygame.display.set_mode((width, height))
+        pygame.display.set_caption('Choices')
+        pygame.display.update() 
+
+        background3 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/3.png")
+        background2 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/2.png")
+        background1 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/1.png")
+
+        screen.blit(background3, (0,0))
+        pygame.display.update()
+        time.sleep(1)
+        
+        screen.blit(background2, (0,0))
+        pygame.display.update()
+        time.sleep(1)
+       
+        screen.blit(background1, (0,0))
+        pygame.display.update()
+        time.sleep(1)
+            #threetext = textfont.render('3' , True , (0,0,0))
+            #time.sleep(3)
+            #pygame.display.flip()
+            #run1=False
         
         
        
