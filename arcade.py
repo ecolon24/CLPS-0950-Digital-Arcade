@@ -5,7 +5,8 @@ from io import BytesIO
 from os import stat_result
 import os.path
 import snake
-import space_invaders
+#import space_invaders
+import pong
 #import Tetris
 
 def main_menu():
@@ -17,14 +18,6 @@ def main_menu():
     button_light = (170,170,170)
     button_dark = (140,140,140)
     black = (0,0,0)
-    #tetris = pygame.image.load('Typical_Tetris_Game.svg.png')
-    #myImage = Image.open("MacintoshHD/Users/EvelynKrall/Documents/GitHub/CLPS-0950-Digital-Arcade/Typical_Tetris_Game.svg.png")
-    #myImage = Image.open('./Images_folder')
-    #url = 'https://github.com/ecolon24/CLPS-0950-Digital-Arcade/blob/main/Typical_Tetris_Game.svg.png'
-
-    #response = requests.get(url)
-    #img = Image.open(BytesIO(response.content))
-
 
 
     #dimensions of window
@@ -41,7 +34,7 @@ def main_menu():
     quittext = textfont.render('Quit' , True , black)
     tetristext = textfont.render('Tetris' , True , black)
     snaketext = textfont.render('Snake' , True , black)
-    spacetext = textfont.render('Space Invaders' , True , black)
+    pongtext = textfont.render('Pong' , True , black)
 
 
 
@@ -72,8 +65,7 @@ def main_menu():
         screen.blit(quittext , (width/2-20,height/2+30))
         screen.blit(tetristext , (width/2-232,height/2-50))
         screen.blit(snaketext , (width/2-26,height/2-50))
-        screen.blit(spacetext , (width/2+150,height/2-50))
-        #screen.blit(tetris, (0,0), (width/2, height/2))
+        screen.blit(pongtext , (width/2+190,height/2-50))
         pygame.display.update()  
 
         for event in pygame.event.get():
@@ -95,7 +87,8 @@ def main_menu():
             #What happens when the space invaders button is clicked
                 if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
-                    space_invaders.space_invaders() 
+                    pong.game()
+                    #space_invaders.space_invaders() 
                   
 
 
