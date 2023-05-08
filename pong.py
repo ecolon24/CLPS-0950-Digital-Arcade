@@ -37,18 +37,47 @@ def game():
         white = (255,255,255)
         FPS = pygame.time.Clock()
 
+        speed = 5
+        ballx = 7
+        bally = 7
+
         player = pygame.Rect(275,450,100,10)
+        ball = pygame.Rect(290,290,10,10)
 
         def show():
             FPS.tick(60)
             screen.fill(black)
             pygame.draw.rect(screen,white,player)
+            pygame.draw.ellipse(screen,white,ball)
+
+        def move():
+            if keys[pygame.K_RIGHT]:
+                player.x += 5
+                if player.x >= 595:
+                    player.x = 595
+            elif keys[pygame.K_LEFT]:
+                player.x -=5
+                if player.x <= 5:
+                    player.x = 5
+
+
 
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
+            
+            ball.x += ballx
+            ball.y += bally
+
+            if ball.top <= 0 or ball.bottom >= 700:
+                bally += -1
+            if ball.left <= 0 or ball.right >= 500:
+                ballx += -1
+
+            keys = pygame.key.get_pressed()
             show()
+            move()
 
             pygame.display.update()
 
