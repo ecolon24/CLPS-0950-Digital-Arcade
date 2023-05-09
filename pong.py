@@ -42,9 +42,12 @@ def game():
         white = (255,255,255)
         FPS = pygame.time.Clock()
 
-        speed = 5
+        #speed = 5
         ballx = 3
         bally = 3
+
+        score = 0
+        game_font = pygame.font.Font("freesansbold.ttf", 20)
 
         player = pygame.Rect(275,450,100,10)
         ball = pygame.Rect(290,290,10,10)
@@ -61,7 +64,7 @@ def game():
                 if player.x >= 595:
                     player.x = 595
             elif keys[pygame.K_LEFT]:
-                player.x -=5
+                player.x -= 5
                 if player.x <= 5:
                     player.x = 5
 
@@ -73,7 +76,9 @@ def game():
             
             ball.x += ballx
             ball.y += bally
+            
 
+            
             #ball.direction = 1,1
             #ball.speed = 7
 
@@ -86,9 +91,24 @@ def game():
             if ball.right >= wwidth:
                 ballx -= 1
 
+            
+            if ball.colliderect(player):
+                bally += -7
+                ballx += 0.1
+                score += 1
+
+            if ball.y >= 475:
+                bally = 0
+                ballx = 0
+                speed = 0
+
+        
             keys = pygame.key.get_pressed()
             show()
             move()
+
+            pt = game_font.render(f"{score}",False,white)
+            screen.blit(pt, (350,100))
 
             pygame.display.update()
 
