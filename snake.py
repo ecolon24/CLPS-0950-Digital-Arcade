@@ -59,12 +59,10 @@ def game():
 
     def generate_food():
         while True:
-            foodx = round(random.randrange(width/2-300, width/2+300) / 20.0) * 20.0
-            foody = round(random.randrange(height/2-300, height/2+300) / 20.0) * 20.0
+            foodx = round(random.randrange(width/2-280, width/2+280) / 20.0) * 20.0
+            foody = round(random.randrange(height/2-280, height/2+280) / 20.0) * 20.0
                 # Check if the generated position is not occupied by the snake's body
-            if ([foodx, foody] not in snake_body and (
-                foodx < snake_x - 20 or foodx > snake_x + 20 or
-                foody < snake_y - 20 or foody > snake_y + 20)):
+            if [foodx, foody] not in snake_body: 
                 break  # Exit the while loop once a valid position is found
 
         return foodx, foody
@@ -128,12 +126,13 @@ def game():
                    pygame.quit()
                    sys.exit()
                if width-180 <= mouse[0] <= width-40 and 80 <= mouse[1] <= 120:
-                   if gamespeed > 25:
+                   if gamespeed < 24:
                         gamespeed+=1
-
+                        difficulty += 1
                if width-180 <= mouse[0] <= width-40 and 150<= mouse[1] <= 190:
                    if gamespeed > 5:
                         gamespeed-=1
+                        difficulty -= 1
                    
            #makes the snake plan to move in direction of arrow key
            elif event.type == pygame.KEYDOWN:
@@ -167,9 +166,9 @@ def game():
        elif direction == 'down':
            snake_position[1] += 20
 
-
+       #make sure snaks stays consistent length
        snake_body.insert(0, list(snake_position))
-       if len(snake_body) > snake_score:  # Check if the snake has more than 5 segments
+       if len(snake_body) > snake_score:  
             snake_body.pop()
 
        #if the head of the snake is on the food, it grows in length
@@ -178,11 +177,11 @@ def game():
             snake_score += 1
             score += 10
             score_text = textfont.render('Score: ' + str(score), True, black)
-
             foodx, foody = generate_food()
        else:
             snake_body.pop()
         
+       #trying to figure out collision with itself
        if snake_location in snake_body[1:]:
             running = False
             losescreen.losing() 
