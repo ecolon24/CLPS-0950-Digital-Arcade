@@ -13,9 +13,14 @@ def game():
         screen = pygame.display.set_mode((width, height))
         pygame.display.set_caption('COUNTDOWN')
         pygame.display.update() 
+        backgroundinstructions = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/instructions1.png")
         background3 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/3.png")
         background2 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/2.png")
         background1 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/1.png")
+
+        screen.blit(backgroundinstructions, (0,0))
+        pygame.display.update()
+        time.sleep(5)
 
         screen.blit(background3, (0,0))
         pygame.display.update()
