@@ -17,17 +17,21 @@ def game():
     red = (255,0,0)
 
     score = 0 
+    gamespeed = 5
+    difficulty = 1
+
 
     textfont = pygame.font.SysFont('Arial',18)
     quittext = textfont.render('Quit' , True , black)
-
-    
+    diffup = textfont.render('Harder' , True , black)
+    diffdown = textfont.render('Easier' , True , black)
 
 
     snake_height = 20
     snake_length = 20
     snake_x = width // 2 - snake_height // 2
     snake_y = height // 2 - snake_length // 2
+    snake_location = [snake_x,snake_y]
 
 
     clock = pygame.time.Clock()
@@ -71,7 +75,7 @@ def game():
     food_spawn = True
     newdirection = []
     direction = []
-    snake_score = 1
+    snake_score = 2
     foodx, foody = generate_food()
 
     while running:
@@ -82,9 +86,28 @@ def game():
            pygame.draw.rect(screen,button_light,[width-180,height-80,140,40])   
        else:
            pygame.draw.rect(screen,button_dark,[width-180,height-80,140,40])
+
+
+       if width-180 <= mouse[0] <= width-40 and 80 <= mouse[1] <= 120:
+           pygame.draw.rect(screen,button_light,[width-180,80,140,40])   
+       else:
+           pygame.draw.rect(screen,button_dark,[width-180,80,140,40])
+
+       if width-180 <= mouse[0] <= width-40 and 150 <= mouse[1] <= 190:
+           pygame.draw.rect(screen,button_light,[width-180,150,140,40])   
+       else:
+           pygame.draw.rect(screen,button_dark,[width-180,150,140,40])
+
+        
        screen.blit(quittext , (width-130,height-70))
-       scoretext = textfont.render('Score : ' + str(score), True, black)
-       screen.blit(scoretext , (10,20))
+       score_text = textfont.render('Score: ' + str(score), True, black)
+       screen.blit(score_text, (10, 10)) 
+
+
+       diff_text = textfont.render('Difficulty: ' + str(difficulty), True, black)
+       screen.blit(diff_text, (10, 50))
+       screen.blit(diffup, (width-140, 90)) 
+       screen.blit(diffdown, (width-140, 160))
 
        pygame.display.update()
       
@@ -104,6 +127,13 @@ def game():
                    running = False
                    pygame.quit()
                    sys.exit()
+               if width-180 <= mouse[0] <= width-40 and 80 <= mouse[1] <= 120:
+                   if gamespeed > 25:
+                        gamespeed+=1
+
+               if width-180 <= mouse[0] <= width-40 and 150<= mouse[1] <= 190:
+                   if gamespeed > 5:
+                        gamespeed-=1
                    
            #makes the snake plan to move in direction of arrow key
            elif event.type == pygame.KEYDOWN:
@@ -147,9 +177,15 @@ def game():
             food_spawn = True
             snake_score += 1
             score += 10
+            score_text = textfont.render('Score: ' + str(score), True, black)
+
             foodx, foody = generate_food()
        else:
             snake_body.pop()
+        
+       if snake_location in snake_body[1:]:
+            running = False
+            losescreen.losing() 
     
 
        pygame.draw.rect(screen, black, [300, 100, 600, 600])
@@ -170,7 +206,7 @@ def game():
             
             
        #set speed of clock
-       clock.tick(5)
+       clock.tick(gamespeed)
 
 if __name__ == "__main__":
 	game()
