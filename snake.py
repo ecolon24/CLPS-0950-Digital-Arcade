@@ -16,9 +16,12 @@ def game():
     white = (255,255,255)
     red = (255,0,0)
 
+    score = 0 
 
     textfont = pygame.font.SysFont('Arial',18)
     quittext = textfont.render('Quit' , True , black)
+
+    
 
 
     snake_height = 20
@@ -45,8 +48,8 @@ def game():
     snake_position = [width/2, height/2]
 
     #spawning food on a 20x20 grid
-    foodx = round(random.randrange(width/2-300, width/2+300) / 20.0) * 20.0
-    foody = round(random.randrange(height/2-300, height/2+300) / 20.0) * 20.0
+    foodx = round(random.randrange(width/2-280, width/2+280) / 20.0) * 20.0
+    foody = round(random.randrange(height/2-280, height/2+280) / 20.0) * 20.0
     food_position = [foodx, foody]
     food_spawn = True
 
@@ -68,7 +71,7 @@ def game():
     food_spawn = True
     newdirection = []
     direction = []
-    snake_score = 2
+    snake_score = 1
     foodx, foody = generate_food()
 
     while running:
@@ -80,10 +83,12 @@ def game():
        else:
            pygame.draw.rect(screen,button_dark,[width-180,height-80,140,40])
        screen.blit(quittext , (width-130,height-70))
-      
+       scoretext = textfont.render('Score : ' + str(score), True, black)
+       screen.blit(scoretext , (10,20))
+
        pygame.display.update()
       
-      
+       
        #if snake hits the edges of the screen, import losescreen
        if snake_position[0] < 300 or snake_position[0]+snake_height > 900 or snake_position[1] < 100 or snake_position[1]+snake_height > 700:
            running = False
@@ -141,6 +146,7 @@ def game():
        if snake_position[0] == foodx and snake_position[1] == foody:
             food_spawn = True
             snake_score += 1
+            score += 10
             foodx, foody = generate_food()
        else:
             snake_body.pop()
