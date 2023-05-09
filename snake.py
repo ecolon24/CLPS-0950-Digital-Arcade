@@ -181,18 +181,16 @@ def game():
        else:
             snake_body.pop()
         
-       #trying to figure out collision with itself
-       if snake_location in snake_body[1:]:
-            running = False
-            losescreen.losing() 
-    
 
        pygame.draw.rect(screen, black, [300, 100, 600, 600])
 
        for pos in snake_body:
         pygame.draw.rect(screen, white,[pos[0], pos[1], snake_height, snake_length])
         
-
+       if snake_position in snake_body[1:]:
+            running = False
+            losescreen.losing()
+       
        #cleaning up border
        pygame.draw.rect(screen, background_colour, [0, 0, width, 100])
        pygame.draw.rect(screen, background_colour, [0, 0, 300, height])
