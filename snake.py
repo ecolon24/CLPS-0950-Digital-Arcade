@@ -188,8 +188,10 @@ def game():
         pygame.draw.rect(screen, white,[pos[0], pos[1], snake_height, snake_length])
         
        if snake_position in snake_body[1:]:
-            running = False
-            losescreen.losing()
+            if (snake_position in snake_body[1:]) and (len(snake_body) > 3):
+                running = False
+                losescreen.losing()
+
        
        #cleaning up border
        pygame.draw.rect(screen, background_colour, [0, 0, width, 100])
