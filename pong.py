@@ -2,10 +2,14 @@ import pygame
 import sys
 import time
 import turtle
+import random
 from random import randint
+from pygame import mixer
+
 
 def game():
     pygame.init()
+    mixer.init()
     def oneplayer():
 
         (width, height) = (965, 590)
@@ -45,7 +49,8 @@ def game():
         #speed = 5
         ballx = 3
         bally = 3
-
+        bouncesound = mixer.music.load("Documents/Github/CLPS-0950-Digital-Arcade/boing2.mp3")
+        mixer.music.set_volume(0.4)
         score = 0
         game_font = pygame.font.Font("freesansbold.ttf", 20)
 
@@ -96,6 +101,7 @@ def game():
                 bally += -7
                 ballx += 0.1
                 score += 1
+                mixer.music.play()
 
             if ball.y >= 475:
                 bally = 0
