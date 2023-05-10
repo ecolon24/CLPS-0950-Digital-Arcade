@@ -5,7 +5,7 @@ import turtle
 import random
 from random import randint
 from pygame import mixer
-
+import tryagainscreen
 
 def game():
     pygame.init()
@@ -281,7 +281,7 @@ def game():
                 if player2_score > 5:
                     BALL_VELOCITY = [0,0]
                     won = True
-                    winscreen = "Left Player Wins!!"
+                    winscreen = "Right Player Wins!!"
 
             elif ball.off_screen_right():
                 player1_score += 1
@@ -290,7 +290,7 @@ def game():
                 if player1_score >5:
                     BALL_VELOCITY = [0,0]
                     won = True
-                    winscreen = "Right Player Wins!!"
+                    winscreen = "Left Player Wins!!"
 
     # Draw the objects on the screen
             screen.fill((0, 0, 0))
@@ -314,6 +314,9 @@ def game():
                 pygame.display.update()
                 player1.reset()
                 player2.reset()
+                time.sleep(3)
+                tryagainscreen.losing()
+
 
             #play again? 
                 #playagaintext = textfont.render('Play Again?' , True , black)

@@ -1,6 +1,7 @@
 import pygame
 import sys
 import arcade
+import pong
 pygame.init()
 
 def losing():
@@ -20,24 +21,23 @@ def losing():
 
     #initialising the text
     textfont = pygame.font.SysFont('Arial',18)
-    bigfont = pygame.font.SysFont('Arial',30)
+    bigfont = pygame.font.SysFont('Arial',40)
     quittext = textfont.render('Quit' , True , black)
-    losetext = bigfont.render('You Lost!', True , black)
-    mainmenutext = textfont.render('Main Menu' , True , black)
+    losetext = bigfont.render('Play Again?', True , black)
+    mainmenutext = textfont.render('Pong Home' , True , black)
 
 
     running = True
     screen.fill(background_colour)
     while running == True:
         mouse = pygame.mouse.get_pos()
-        screen.blit(losetext , (width/2-65,height/4))
+        screen.blit(losetext , (width/2 -100 ,height/4))
         
         #hovering over them changes the colours of the buttons
         if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
             pygame.draw.rect(screen,button_light,[width/2-70,height/2-60,140,40])    
         else:
             pygame.draw.rect(screen,button_dark,[width/2-70,height/2-60,140,40])
-        
         if width/2-70 <= mouse[0] <= width/2+70 and height/2+20 <= mouse[1] <= height/2+60:
             pygame.draw.rect(screen,button_light,[width/2-70,height/2+20,140,40])        
         else:
@@ -54,10 +54,10 @@ def losing():
                     sys.exit()
                 if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
-                    arcade.main_menu()
+                    pong.game()
        
         screen.blit(quittext , (width/2-20,height/2+30))
-        screen.blit(mainmenutext , (width/2-42,height/2-50))
+        screen.blit(mainmenutext , (width/2-45,height/2-50))
 
         pygame.display.update()
 
