@@ -2,6 +2,7 @@ import pygame
 import sys
 import random
 import losescreen
+import winscreen
 
 def game():
     pygame.init()
@@ -25,13 +26,12 @@ def game():
     quittext = textfont.render('Quit' , True , black)
     diffup = textfont.render('Harder' , True , black)
     diffdown = textfont.render('Easier' , True , black)
-
+    instruc1 = textfont.render('use the arrow keys' , True , black)
+    instruc2 = textfont.render('to control the snake!' , True , black)
+    instruc3 = textfont.render('try to get to 500!' , True , black)
 
     snake_height = 20
     snake_length = 20
-    snake_x = width // 2 - snake_height // 2
-    snake_y = height // 2 - snake_length // 2
-    snake_location = [snake_x,snake_y]
 
 
     clock = pygame.time.Clock()
@@ -52,21 +52,19 @@ def game():
     snake_position = [width/2, height/2]
 
     #spawning food on a 20x20 grid
-    foodx = round(random.randrange(width/2-280, width/2+280) / 20.0) * 20.0
-    foody = round(random.randrange(height/2-280, height/2+280) / 20.0) * 20.0
-    food_position = [foodx, foody]
+    foodx = round(random.randrange(300, 880) / 20.0) * 20.0
+    foody = round(random.randrange(100, 680) / 20.0) * 20.0
     food_spawn = True
 
     def generate_food():
         while True:
-            foodx = round(random.randrange(width/2-280, width/2+280) / 20.0) * 20.0
-            foody = round(random.randrange(height/2-280, height/2+280) / 20.0) * 20.0
+            foodx = round(random.randrange(300, 880) / 20.0) * 20.0
+            foody = round(random.randrange(100, 680) / 20.0) * 20.0
                 # Check if the generated position is not occupied by the snake's body
             if [foodx, foody] not in snake_body: 
                 break  # Exit the while loop once a valid position is found
 
         return foodx, foody
-
 
    
     running = True
@@ -100,6 +98,8 @@ def game():
        screen.blit(quittext , (width-130,height-70))
        score_text = textfont.render('Score: ' + str(score), True, black)
        screen.blit(score_text, (10, 10)) 
+
+
 
 
        diff_text = textfont.render('Difficulty: ' + str(difficulty), True, black)
@@ -191,6 +191,10 @@ def game():
             if (snake_position in snake_body[1:]) and (len(snake_body) > 3):
                 running = False
                 losescreen.losing()
+    
+       if snake_score == 500:
+           running = False
+           winscreen.winning() 
 
        
        #cleaning up border
@@ -202,7 +206,10 @@ def game():
        if food_spawn == True: 
             pygame.draw.rect(screen, red, [foodx, foody, 20, 20])
 
-            
+        
+       screen.blit(instruc1, (20, 650)) 
+       screen.blit(instruc2, (10, 670)) 
+       screen.blit(instruc3, (10, 690)) 
             
        #set speed of clock
        clock.tick(gamespeed)
