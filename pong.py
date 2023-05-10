@@ -17,10 +17,10 @@ def game():
         screen = pygame.display.set_mode((width, height))
         pygame.display.set_caption('COUNTDOWN')
         pygame.display.update() 
-        backgroundinstructions = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/instructions1.png")
-        background3 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/3.png")
-        background2 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/2.png")
-        background1 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/1.png")
+        backgroundinstructions = pygame.image.load("instructions1.png")
+        background3 = pygame.image.load("3.png")
+        background2 = pygame.image.load("2.png")
+        background1 = pygame.image.load("1.png")
 
         screen.blit(backgroundinstructions, (0,0))
         pygame.display.update()
@@ -49,7 +49,7 @@ def game():
         #speed = 5
         ballx = 3
         bally = 3
-        bouncesound = mixer.music.load("Documents/Github/CLPS-0950-Digital-Arcade/boing2.mp3")
+        bouncesound = mixer.music.load("boing2.mp3")
         mixer.music.set_volume(0.4)
         score = 0
         game_font = pygame.font.Font("freesansbold.ttf", 20)
@@ -133,10 +133,10 @@ def game():
         screen = pygame.display.set_mode((width, height))
         pygame.display.set_caption('COUNTDOWN')
         pygame.display.update() 
-        backgroundinstructions = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/instructions2.png")
-        background3 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/3.png")
-        background2 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/2.png")
-        background1 = pygame.image.load("Documents/Github/CLPS-0950-Digital-Arcade/1.png")
+        backgroundinstructions = pygame.image.load("instructions2.png")
+        background3 = pygame.image.load("3.png")
+        background2 = pygame.image.load("2.png")
+        background1 = pygame.image.load("1.png")
 
 
         screen.blit(backgroundinstructions, (0,0))
@@ -283,7 +283,6 @@ def game():
                     won = True
                     winscreen = "Left Player Wins!!"
 
-
             elif ball.off_screen_right():
                 player1_score += 1
                 ball = Ball(wwidth // 2, wheight // 2)
@@ -332,6 +331,7 @@ def game():
                 else:
                     pygame.draw.rect(screen,button_dark,[width/2+140,height/2-60,140,40])
 
+
                 screen.blit(playagaintext , (width/2-250,height/2-50))
                 screen.blit(quittext2 , (width/2+170,height/2-50))
                 pygame.display.update()
@@ -362,7 +362,7 @@ def game():
     button_light = (170,170,170)
     button_dark = (140,140,140)
     black = (0,0,0)
-    background = pygame.image.load("Documents/GitHub/CLPS-0950-Digital-Arcade/pongbackground.png")
+    background = pygame.image.load("pongbackground.png")
 
 
     #dimensions of window

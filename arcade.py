@@ -20,7 +20,7 @@ def main_menu():
     button_light2 = (186,85,211)
     black = (0,0,0)
     white = (255,255,255)
-    arcade_background = pygame.image.load("Documents/GitHub/CLPS-0950-Digital-Arcade/arcadebackground.jpeg")
+    arcade_background = pygame.image.load("arcadebackground.jpeg")
 
 
     #dimensions of window
