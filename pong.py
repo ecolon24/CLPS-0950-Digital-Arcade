@@ -52,6 +52,7 @@ def game():
         pygame.display.set_caption("Single Player Pong Game")
         black = (0,0,0)
         white = (255,255,255)
+        purpleblue = (123,104,238)
         FPS = pygame.time.Clock()
         
 
@@ -69,8 +70,8 @@ def game():
         def show():
             FPS.tick(60)
             screen.fill(black)
-            pygame.draw.rect(screen,white,player)
-            pygame.draw.ellipse(screen,white,ball)
+            pygame.draw.rect(screen,purpleblue,player)
+            pygame.draw.ellipse(screen,purpleblue,ball)
 
         def move():
             if keys[pygame.K_RIGHT]:
