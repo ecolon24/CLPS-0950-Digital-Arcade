@@ -231,6 +231,17 @@ def game():
                 self.x = self.original_x
                 self.y = self.original_y
 
+        def handle_paddle_movement(keys, left_paddle, right_paddle):
+            if keys[pygame.K_w] and left_paddle.y - left_paddle.VEL >= 0:
+                left_paddle.move(up=True)
+            if keys[pygame.K_s] and left_paddle.y + left_paddle.VEL + left_paddle.height <= wheight:
+                left_paddle.move(up=False)
+
+            if keys[pygame.K_UP] and right_paddle.y - right_paddle.VEL >= 0:
+                right_paddle.move(up=True)
+            if keys[pygame.K_DOWN] and right_paddle.y + right_paddle.VEL + right_paddle.height <= wheight:
+                right_paddle.move(up=False)
+
 
         BALL_VELOCITY = [4,4]
         player1_score = 0
@@ -248,15 +259,17 @@ def game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     run = False
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_w:
-                        player1.move_up()
-                    elif event.key == pygame.K_s:
-                        player1.move_down()
-                    elif event.key == pygame.K_UP:
-                        player2.move_up()
-                    elif event.key == pygame.K_DOWN:
-                        player2.move_down()
+                #elif event.type == pygame.KEYDOWN:
+                    #if event.key == pygame.K_w:
+                    #   player1.move_up()
+                    #elif event.key == pygame.K_s:
+                    #    player1.move_down()
+                    #elif event.key == pygame.K_UP:
+                    #    player2.move_up()
+                    #elif event.key == pygame.K_DOWN:
+                    #    player2.move_down()
+            keys = pygame.key.get_pressed()
+            handle_paddle_movement(keys, player1, player2)
 
     # Move the ball
             ball.move()
