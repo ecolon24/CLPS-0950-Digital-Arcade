@@ -6,6 +6,7 @@ import random
 from random import randint
 from pygame import mixer
 import tryagainscreen
+import losescreen
 
 def game():
     pygame.init()
@@ -106,7 +107,17 @@ def game():
             if ball.y >= 475:
                 bally = 0
                 ballx = 0
-                speed = 0
+                #lost screen here
+
+                losescreen2 = "You Lose!"
+                textfont2 = pygame.font.SysFont('Arial',40)
+                text = textfont2.render(losescreen2, 1, white)
+                screen.blit(text, (wwidth//2 - text.get_width() // 2, 180 - text.get_height()//2))
+                pygame.display.update()
+                time.sleep(3)
+                losescreen.losing()
+
+
 
         
             keys = pygame.key.get_pressed()

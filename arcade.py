@@ -5,7 +5,6 @@ from io import BytesIO
 from os import stat_result
 import os.path
 import snake
-#import space_invaders
 import pong
 #import Tetris
 
