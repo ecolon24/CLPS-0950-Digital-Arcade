@@ -1,7 +1,6 @@
 import pygame
 import sys
 import time
-import turtle
 import random
 from random import randint
 from pygame import mixer
@@ -15,8 +14,10 @@ def game():
     mixer.music.load(theme_music) 
     mixer.music.play(loops=-1)  
     def oneplayer():
-
+        mixer.music.stop()
         (width, height) = (965, 590)
+        countbeep = 'beep.mp3'
+        mixer.music.load(countbeep)
         pygame.display.update()
         screen = pygame.display.set_mode((width, height))
         pygame.display.set_caption('COUNTDOWN')
@@ -32,14 +33,17 @@ def game():
 
         screen.blit(background3, (0,0))
         pygame.display.update()
+        mixer.music.play()
         time.sleep(1)
         
         screen.blit(background2, (0,0))
         pygame.display.update()
+        mixer.music.play()
         time.sleep(1)
        
         screen.blit(background1, (0,0))
         pygame.display.update()
+        mixer.music.play()
         time.sleep(1)
 
         #game for one player!
@@ -49,18 +53,18 @@ def game():
         black = (0,0,0)
         white = (255,255,255)
         FPS = pygame.time.Clock()
-        mixer.music.stop()
+        
 
         #speed = 5
         ballx = 3
         bally = 3
-        bouncesound = mixer.music.load("boing2.mp3")
-        mixer.music.set_volume(0.4)
+        mixer.music.load("boing2.mp3")
         score = 0
-        game_font = pygame.font.Font("freesansbold.ttf", 20)
+        game_font = pygame.font.Font("freesansbold.ttf", 50)
 
         player = pygame.Rect(275,450,100,10)
-        ball = pygame.Rect(290,290,10,10)
+        ball = pygame.Rect(290,290,10,15)
+        
 
         def show():
             FPS.tick(60)
@@ -104,7 +108,7 @@ def game():
             
             if ball.colliderect(player):
                 bally += -7
-                ballx += 0.1
+                ballx *= 1.15
                 score += 1
                 mixer.music.play()
 
@@ -141,6 +145,9 @@ def game():
         
 
     def twoplayer():
+        mixer.music.stop()
+        countbeep2 = 'beep.mp3'
+        mixer.music.load(countbeep2)
         white = (255,255,255)
         
         #countdown 
@@ -161,14 +168,17 @@ def game():
 
         screen.blit(background3, (0,0))
         pygame.display.update()
+        mixer.music.play()
         time.sleep(1)
         
         screen.blit(background2, (0,0))
         pygame.display.update()
+        mixer.music.play()
         time.sleep(1)
        
         screen.blit(background1, (0,0))
         pygame.display.update()
+        mixer.music.play()
         time.sleep(1)
            
 
@@ -189,8 +199,8 @@ def game():
                 self.color = (255, 255, 255)
 
             def move(self):
-                self.x += BALL_VELOCITY[0]
-                self.y += BALL_VELOCITY[1]
+                self.x += ballspeed[0]
+                self.y += ballspeed[1]
 
             def draw(self, window):
                 pygame.draw.circle(window, self.color, (int(self.x), int(self.y)), self.radius)
@@ -258,11 +268,11 @@ def game():
                 right_paddle.move(up=False)
 
 
-        BALL_VELOCITY = [4,4]
+        ballspeed = [4,4]
         player1_score = 0
         player2_score = 0
         font = pygame.font.Font("freesansbold.ttf", 50)
-
+        mixer.music.load("boing2.mp3")
         #def endscreen():
         won = False
             
@@ -286,25 +296,27 @@ def game():
 
     # Check for collisions
             if ball.hit_paddle(player1) or ball.hit_paddle(player2):
-                BALL_VELOCITY[0] *= -1.1
-                BALL_VELOCITY[1] *= 1.1
+                ballspeed[0] *= -1.1
+                ballspeed[1] *= 1.1
+                mixer.music.play()
             if ball.hit_wall():
-                BALL_VELOCITY[1] *= -1
+                ballspeed[1] *= -1
+                mixer.music.play()
             if ball.off_screen_left():
                 player2_score += 1
                 ball = Ball(wwidth // 2, wheight // 2)
-                BALL_VELOCITY = [random.choice([-4, 4]), random.choice([-4, 4])]
+                ballspeed = [random.choice([-4, 4]), random.choice([-4, 4])]
                 if player2_score > 5:
-                    BALL_VELOCITY = [0,0]
+                    ballspeed = [0,0]
                     won = True
                     winscreen = "Right Player Wins!!"
 
             elif ball.off_screen_right():
                 player1_score += 1
                 ball = Ball(wwidth // 2, wheight // 2)
-                BALL_VELOCITY = [random.choice([-4, 4]), random.choice([-4, 4])]
+                ballspeed = [random.choice([-4, 4]), random.choice([-4, 4])]
                 if player1_score >5:
-                    BALL_VELOCITY = [0,0]
+                    ballspeed = [0,0]
                     won = True
                     winscreen = "Left Player Wins!!"
 
@@ -332,43 +344,8 @@ def game():
                 player2.reset()
                 time.sleep(3)
                 tryagainscreen.losing()
-
-
-            #play again? 
-                #playagaintext = textfont.render('Play Again?' , True , black)
-                #quittext2 = textfont.render('Quit' , True , black)
-
-                
-            #code for making play again button lighter when hovered over it 
-                #if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
-                    #pygame.draw.rect(screen,button_light,[width/2-280,height/2-60,140,40])    
-                #else:
-                    #pygame.draw.rect(screen,button_dark,[width/2-280,height/2-60,140,40])
-            #code for making quit button lighter when hovered over it 
-                #if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
-                    #pygame.draw.rect(screen,button_light,[width/2+140,height/2-60,140,40])    
-                #else:
-                    #pygame.draw.rect(screen,button_dark,[width/2+140,height/2-60,140,40])
-
-
-                #screen.blit(playagaintext , (width/2-250,height/2-50))
-                #screen.blit(quittext2 , (width/2+170,height/2-50))
-                #pygame.display.update()
-
-                #if event.type == pygame.MOUSEBUTTONDOWN:
-            #What happens when the oneplayer button is clicked
-                    #if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
-                       # BALL_VELOCITY =[4,4]
-                       # player1_score = 0
-                       # player2_score = 0
-                       # playagain = True
-            #What happens when the twoplayer button is clicked
-                   # if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
-                    #    pygame.quit()
-                    #    sys.ext()
                 
             
-
     # Update the display
             pygame.display.update()
 
@@ -376,7 +353,6 @@ def game():
         pygame.quit()
 
 
-    
     #single player or two player
     button_light = (170,170,170)
     button_dark = (140,140,140)

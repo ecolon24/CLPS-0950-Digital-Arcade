@@ -26,7 +26,7 @@ def losing():
 
     #initialising the text
     textfont = pygame.font.SysFont('Arial',18)
-    bigfont = pygame.font.SysFont('Arial',30)
+    bigfont = pygame.font.SysFont('Arial',50)
     quittext = textfont.render('Quit' , True , black)
     losetext = bigfont.render('You Lost!', True , black)
     mainmenutext = textfont.render('Main Menu' , True , black)
