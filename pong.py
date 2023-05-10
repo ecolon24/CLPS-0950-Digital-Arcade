@@ -11,6 +11,9 @@ import losescreen
 def game():
     pygame.init()
     mixer.init()
+    theme_music = 'pongbackgroundmusic.mp3'
+    mixer.music.load(theme_music) 
+    mixer.music.play(loops=-1)  
     def oneplayer():
 
         (width, height) = (965, 590)
@@ -46,6 +49,7 @@ def game():
         black = (0,0,0)
         white = (255,255,255)
         FPS = pygame.time.Clock()
+        mixer.music.stop()
 
         #speed = 5
         ballx = 3

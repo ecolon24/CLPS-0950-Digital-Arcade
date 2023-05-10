@@ -2,8 +2,14 @@ import pygame
 import sys
 import arcade
 pygame.init()
+from pygame import mixer
+mixer.init()
 
 def losing():
+    
+    losing = 'gameover.wav'
+    mixer.music.load(losing) 
+    mixer.music.play()  
     (width, height) = (1200, 800)
     background_colour = (204,229,255)
     button_light = (170,170,170)

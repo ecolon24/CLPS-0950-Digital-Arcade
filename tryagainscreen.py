@@ -2,9 +2,14 @@ import pygame
 import sys
 import arcade
 import pong
+from pygame import mixer
 pygame.init()
 
 def losing():
+    mixer.init()
+    theme_music = 'pongbackgroundmusic.mp3'
+    mixer.music.load(theme_music) 
+    mixer.music.play(loops=-1)  
     (width, height) = (1200, 800)
     background_colour = (204,229,255)
     button_light = (170,170,170)
@@ -54,6 +59,7 @@ def losing():
                     sys.exit()
                 if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
+                    mixer.music.stop()
                     pong.game()
        
         screen.blit(quittext , (width/2-20,height/2+30))
