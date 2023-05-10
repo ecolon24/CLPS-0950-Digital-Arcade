@@ -21,7 +21,7 @@ block_size= 30
 
 #creating the music
 Tetris_theme_music = 'Tetris Theme Song.mp3'
-sound=mixer.music.load(Tetris_theme_music)
+mixer.music.load(Tetris_theme_music)
 
 
 #play area 

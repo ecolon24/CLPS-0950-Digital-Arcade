@@ -4,9 +4,9 @@ from PIL import Image
 from io import BytesIO
 from os import stat_result
 import os.path
+import Tetris
 import snake
 import pong
-#import Tetris
 
 def main_menu():
     pygame.init()
@@ -81,7 +81,7 @@ def main_menu():
             #What happens when the tetris button is clicked
                 if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
-                    #Tetris.tetris() 
+                    Tetris.game() 
             #What happens when the snake button is clicked
                 if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False

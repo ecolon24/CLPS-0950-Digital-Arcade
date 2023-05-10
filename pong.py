@@ -112,6 +112,7 @@ def game():
                 losescreen2 = "You Lose!"
                 textfont2 = pygame.font.SysFont('Arial',40)
                 text = textfont2.render(losescreen2, 1, white)
+                mixer.music.stop()
                 screen.blit(text, (wwidth//2 - text.get_width() // 2, 180 - text.get_height()//2))
                 pygame.display.update()
                 time.sleep(3)
