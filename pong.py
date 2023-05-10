@@ -247,6 +247,10 @@ def game():
         player2_score = 0
         font = pygame.font.Font("freesansbold.ttf", 50)
 
+        #def endscreen():
+
+            
+
         player1 = Paddle(10, wheight//2 - 100 //2, 20, 100)
         player2 = Paddle(wwidth - 10 - 20, wheight //2 - 100//2, 20, 100)
         ball = Ball(wwidth//2,wheight//2)
@@ -274,10 +278,15 @@ def game():
                 player2_score += 1
                 ball = Ball(wwidth // 2, wheight // 2)
                 BALL_VELOCITY = [random.choice([-4, 4]), random.choice([-4, 4])]
+                if player2_score > 5 or player1_score >5:
+                    BALL_VELOCITY = [0,0]
+
             elif ball.off_screen_right():
                 player1_score += 1
                 ball = Ball(wwidth // 2, wheight // 2)
                 BALL_VELOCITY = [random.choice([-4, 4]), random.choice([-4, 4])]
+                if player2_score > 5 or player1_score >5:
+                    BALL_VELOCITY = [0,0]
 
     # Draw the objects on the screen
             screen.fill((0, 0, 0))
