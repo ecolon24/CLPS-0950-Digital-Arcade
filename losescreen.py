@@ -36,7 +36,7 @@ def losing():
     screen.fill(background_colour)
     while running == True:
         mouse = pygame.mouse.get_pos()
-        screen.blit(losetext , (width/2-65,height/4))
+        screen.blit(losetext , (width/2-100,height/4))
         
         #hovering over them changes the colours of the buttons
         if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
