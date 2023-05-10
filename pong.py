@@ -248,7 +248,7 @@ def game():
         font = pygame.font.Font("freesansbold.ttf", 50)
 
         #def endscreen():
-
+        won = False
             
 
         player1 = Paddle(10, wheight//2 - 100 //2, 20, 100)
@@ -278,15 +278,20 @@ def game():
                 player2_score += 1
                 ball = Ball(wwidth // 2, wheight // 2)
                 BALL_VELOCITY = [random.choice([-4, 4]), random.choice([-4, 4])]
-                if player2_score > 5 or player1_score >5:
+                if player2_score > 5:
                     BALL_VELOCITY = [0,0]
+                    won = True
+                    winscreen = "Left Player Wins!!"
+
 
             elif ball.off_screen_right():
                 player1_score += 1
                 ball = Ball(wwidth // 2, wheight // 2)
                 BALL_VELOCITY = [random.choice([-4, 4]), random.choice([-4, 4])]
-                if player2_score > 5 or player1_score >5:
+                if player1_score >5:
                     BALL_VELOCITY = [0,0]
+                    won = True
+                    winscreen = "Right Player Wins!!"
 
     # Draw the objects on the screen
             screen.fill((0, 0, 0))
@@ -299,6 +304,51 @@ def game():
             player2_text = font.render(str(player2_score), 1, (255, 255, 255))
             screen.blit(player1_text, (wwidth // 4 - player1_text.get_width() // 2, 10))
             screen.blit(player2_text, (3 * wwidth // 4 - player2_text.get_width() // 2, 10))
+
+
+        
+            if won:
+                playagain = False
+                textfont1 = pygame.font.SysFont('Arial',40)
+                text = textfont1.render(winscreen, 1, white)
+                screen.blit(text, (wwidth//2 - text.get_width() // 2, 180 - text.get_height()//2))
+                pygame.display.update()
+                player1.reset()
+                player2.reset()
+
+            #play again? 
+                playagaintext = textfont.render('Play Again?' , True , black)
+                quittext2 = textfont.render('Quit' , True , black)
+
+                
+            #code for making play again button lighter when hovered over it 
+                if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
+                    pygame.draw.rect(screen,button_light,[width/2-280,height/2-60,140,40])    
+                else:
+                    pygame.draw.rect(screen,button_dark,[width/2-280,height/2-60,140,40])
+            #code for making quit button lighter when hovered over it 
+                if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
+                    pygame.draw.rect(screen,button_light,[width/2+140,height/2-60,140,40])    
+                else:
+                    pygame.draw.rect(screen,button_dark,[width/2+140,height/2-60,140,40])
+
+                screen.blit(playagaintext , (width/2-250,height/2-50))
+                screen.blit(quittext2 , (width/2+170,height/2-50))
+                pygame.display.update()
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+            #What happens when the oneplayer button is clicked
+                    if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
+                        BALL_VELOCITY =[4,4]
+                        player1_score = 0
+                        player2_score = 0
+                        playagain = True
+            #What happens when the twoplayer button is clicked
+                    if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
+                        pygame.quit()
+                        sys.ext()
+                
+            
 
     # Update the display
             pygame.display.update()
