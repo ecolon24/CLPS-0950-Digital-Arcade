@@ -5,7 +5,7 @@ import pygame
 import requests
 import io
 from pygame import mixer
-import tkinter as tk
+
 
 pygame.init()
 pygame.font.init()
@@ -426,6 +426,9 @@ def game():
             losescreen.losing()
     #gives the instructions + press to start menu first
     def startup_screen():
+            instructional_music= 'ES_8-bit Sheriff - Wave Saver.mp3'
+            mixer.music.load(instructional_music)
+            mixer.music.play(loops=-1)
             running = True
             while running:
                 win.fill(black)#ensures no text overlap between texts displayed
@@ -463,6 +466,7 @@ def game():
                     if event.type == pygame.QUIT:
                         running = False
                     if event.type == pygame.KEYDOWN:
+                        pygame.time.delay(2000)
                         figure_main_movement() #if you press any key, you go into the game!
                                         
             pygame.quit()
