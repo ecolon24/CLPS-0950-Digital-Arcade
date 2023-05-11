@@ -71,7 +71,7 @@ def game():
             FPS.tick(60)
             screen.fill(black)
             pygame.draw.rect(screen,purpleblue,player)
-            pygame.draw.ellipse(screen,purpleblue,ball)
+            pygame.draw.ellipse(screen,white,ball)
 
         def move():
             if keys[pygame.K_RIGHT]:
@@ -139,9 +139,6 @@ def game():
 
             pygame.display.update()
 
- 
-
-
 
         
 
@@ -187,7 +184,8 @@ def game():
         wwidth, wheight = 700, 500
         screen = pygame.display.set_mode((wwidth, wheight))
         pygame.display.set_caption("Two Player Pong Game")
-
+        BG = pygame.image.load("pong2BG.png")
+        screen.blit(BG, (0,0))
         white = (255, 255, 255)
         purpleblue = (123,104,238)
         black = (0, 0, 0)
@@ -207,10 +205,10 @@ def game():
                 pygame.draw.circle(window, self.color, (int(self.x), int(self.y)), self.radius)
 
             def hit_paddle(self, paddle):
-                if (self.x - self.radius <= paddle.x + (paddle.width + 5) and
+                if (self.x - self.radius <= paddle.x + (paddle.width + 15) and
                     self.x + self.radius >= paddle.x and
                     self.y + self.radius >= paddle.y and
-                    self.y - self.radius <= paddle.y + (paddle.height + 2)):
+                    self.y - self.radius <= paddle.y + (paddle.height + 10)):
                     return True
                 else:
                     return False
@@ -235,8 +233,8 @@ def game():
                 
 
         class Paddle:
-            COLOR = purpleblue
-            VEL = 4
+            color = purpleblue
+            speed = 4
 
             def __init__(self, x, y, width, height):
                 self.x = self.original_x = x
@@ -245,27 +243,22 @@ def game():
                 self.height = height
 
             def draw(self, win):
-                pygame.draw.rect(win, self.COLOR, (self.x, self.y, self.width, self.height))
+                pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.height))
 
             def move(self, up=True):
                 if up:
-                    self.y -= self.VEL
+                    self.y -= self.speed
                 else:
-                    self.y += self.VEL
-
-
-            def reset(self):
-                self.x = self.original_x
-                self.y = self.original_y
+                    self.y += self.speed
 
         def handle_paddle_movement(keys, left_paddle, right_paddle):
-            if keys[pygame.K_w] and left_paddle.y - left_paddle.VEL >= 0:
+            if keys[pygame.K_w] and left_paddle.y - left_paddle.speed >= 0:
                 left_paddle.move(up=True)
-            if keys[pygame.K_s] and left_paddle.y + left_paddle.VEL + left_paddle.height <= wheight:
+            if keys[pygame.K_s] and left_paddle.y + left_paddle.speed + left_paddle.height <= wheight:
                 left_paddle.move(up=False)
-            if keys[pygame.K_UP] and right_paddle.y - right_paddle.VEL >= 0:
+            if keys[pygame.K_UP] and right_paddle.y - right_paddle.speed >= 0:
                 right_paddle.move(up=True)
-            if keys[pygame.K_DOWN] and right_paddle.y + right_paddle.VEL + right_paddle.height <= wheight:
+            if keys[pygame.K_DOWN] and right_paddle.y + right_paddle.speed + right_paddle.height <= wheight:
                 right_paddle.move(up=False)
 
 
@@ -322,7 +315,7 @@ def game():
                     winscreen = "Left Player Wins!!"
 
     # Draw the objects on the screen
-            screen.fill((0, 0, 0))
+            screen.blit(BG, (0,0))
             player1.draw(screen)
             player2.draw(screen)
             ball.draw(screen)
@@ -336,13 +329,11 @@ def game():
 
         
             if won:
-                playagain = False
+                
                 textfont1 = pygame.font.SysFont('Arial',40)
                 text = textfont1.render(winscreen, 1, white)
                 screen.blit(text, (wwidth//2 - text.get_width() // 2, 180 - text.get_height()//2))
                 pygame.display.update()
-                player1.reset()
-                player2.reset()
                 time.sleep(3)
                 tryagainscreen.losing()
                 
