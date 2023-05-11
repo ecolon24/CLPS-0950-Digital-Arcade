@@ -9,7 +9,7 @@ import tkinter as tk
 
 pygame.init()
 pygame.font.init()
-mixer.init()
+pygame.mixer.init()
 
 
 #Global Variables + Audios
@@ -153,8 +153,7 @@ tetrimino_colors= [green, red, cyan,yellow, orange ,blue,purple] #should make co
 #function that holds the placement of the pieces!
 #new keyword; self! Did a bit of research for it :) 
 def game(): 
-    Tetris_theme_music = 'Tetris Theme Song.mp3'
-    mixer.music.load(Tetris_theme_music)
+        
     class Piece(object):
             rows=20
             columns=10
@@ -165,6 +164,7 @@ def game():
                 self.color = tetrimino_colors[tetriminos.index(tetrimino)]
                 self.rotation= 0
 
+#function that eliminates rows if a player has no black pieces
     def eliminate_full_row(grid, locked_positions):
         # Deleting full rows
         num_eliminated_rows = 0
@@ -178,7 +178,7 @@ def game():
                         del locked_positions[(j, i)]
                     except:
                         continue
-
+        #moving the rest of the shifted blocks from above the eliminated row down (y position)
         if num_eliminated_rows > 0:
             for key in sorted(list(locked_positions), key=lambda x: x[1], reverse=True):
                 x, y = key
@@ -186,12 +186,12 @@ def game():
                     new_key = (x, y + num_eliminated_rows)
                     locked_positions[new_key] = locked_positions.pop(key)
 
-    #start text
+    #start text --> instructions for the game
     def instructional_text(text,size,color,surface):
         i_font= pygame.font.SysFont('Fixedsys', size)
         label= i_font.render(text, 1, color)
         surface.blit(label, (upper_left_x+play_width/2 - (label.get_width()/2), upper_left_y + play_height/2 - label.get_height()/2))
-
+    #the press to start for the game
     def centered_text(text, size, color, surface):
         font = pygame.font.SysFont('Fixedsys', size)
         label= font.render(text, 1, color)
@@ -199,29 +199,25 @@ def game():
         visible=True
         timer_event= pygame.USEREVENT +1
         pygame.time.set_timer(timer_event,500)
-
+        #makes the text flash on and off the screen 
         while True: 
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
                     figure_main_movement()
                 elif event.type == timer_event:
                     visible = not visible
-            surface.fill((0, 0, 0))
-        
+            surface.fill(black)
 
             if visible:
                 surface.blit(label, (upper_left_x+play_width/2 - (label.get_width()/2), upper_left_y + play_height/2 - label.get_height()/2))
             pygame.display.flip()
-
+    #displays the game over message on the screen, not flashing 
     def game_over(text,size,color,surface):
         font = pygame.font.SysFont('Fixedsys', size)
         label= font.render(text, 1, color)
         surface.blit(label, (upper_left_x+play_width/2 - (label.get_width()/2), upper_left_y + play_height/2 - label.get_height()/2))
 
-
-            #creating a list for every row on the grid. 10 blocks width, 20 blocks height!
-            #intialize with all black, will fill in with specified colors as the person plays the game.
-            #locked_position is for when the user "drops + locks in" their blocks, become static instead of dynamic pieces. keep in mind there is a color change because each tetrimino is a dif color!
+    #checking to make sure the tetrimino is still in the game board 
     def legit_space (tetriminos,grid):
             #getting every possible position for 10x20 grid, store in tuple!
             all_positions= [[(j, i) for j in range(10) if grid[i][j] == black] for i in range(20)] #can't add in position if there is a tetrimnio--> AKA another color!
@@ -229,13 +225,13 @@ def game():
             all_positions = [j for sub in all_positions for j in sub]
             #converting tetrimino to positions so we can compare+ check in the tetrimino is a legit space on the grid+not outside it
             format_done= convert_format_of_tetrimino(tetriminos)
-
+            #checking the position 
             for pos in format_done: 
                 if pos not in all_positions:
                     if pos[1] >= 0: #not in valid position if negative value. Think of like a mathematical grid (negative X quadrant)
                         return False
             return True
-
+    #creatinng the grid for the gamboard 
     def create_grid(locked_positions={}):
             grid = [[black for x in range(10)] for y in range(20)]
             
@@ -246,15 +242,16 @@ def game():
                         lp= locked_positions[(j,i)]
                         grid[i][j]= lp
             return grid
-
+    #checking if the player has reached the top of the gameboard and lost 
     def lost_check(positions):
             for pos in positions:
                 x, y = pos
+                #y<=0 symbolizes the player can't move any y spaces more, thus they've reached the top.
                 if y<=0:
                     return True
             return False
 
-        #takes periods/0's in  positions +creates tetriminos
+    #takes periods/0's in  positions +creates tetriminos
     def convert_format_of_tetrimino(tetrimino):
             positions=[]
             #grabs the specific shape+orientation... sublists in a sense.
@@ -270,15 +267,15 @@ def game():
             
             return positions
 
-        #ensures that the pieces being grabbed are in a random order--> User can't predict the pattern + always win the Tetris game! Fixed an intial concern we had :) 
+    #ensures that the pieces being grabbed are in a random order--> User can't predict the pattern + always win the Tetris game! Fixed an intial concern we had :) 
     def grabbing_tetrimino():
             global tetriminos, tetrimino_colors
 
             return Piece(5, 0, random.choice(tetriminos))
 
 
-        #the code that actually draws the grid on the screen display! Have to account for different color the the blocks composing the grid
-        #needs to be 2D, like a mathematical grid. use rows +columns 
+    #the code that actually draws the grid on the screen display! Have to account for different color the the blocks composing the grid
+    #needs to be 2D, like a mathematical grid. use rows +columns 
     def drawing_the_gridlines(surface, row, col):
         for i in range(row):
             # drawing vertical lines, y constantly changing w/static x lines
@@ -286,8 +283,7 @@ def game():
             for j in range(col):
                 # drawing horizontal lines, x constantly changing w/static y lines
                 pygame.draw.line(surface, grey, (upper_left_x+j*block_size, upper_left_y), (upper_left_x+j*block_size, upper_left_y+play_height))
-
-
+    #drawing the window for the player to play on+ creating a multicolored Tetris title at the top!
     def window_draw(surface):
         surface.fill(black)
 
@@ -313,9 +309,10 @@ def game():
                 pygame.draw.rect(surface, grid[i][j], (upper_left_x+j*block_size, upper_left_y+i*block_size, block_size, block_size), 0) # creates blocks horizontally+vertically
         drawing_the_gridlines(surface, 20, 10)
         pygame.draw.rect(surface, grey, (upper_left_x, upper_left_y, play_width, play_height), 5) # grey rectangle that surrounds the border of the grid!
-
+        #updates display so you see griidlines and border for it 
         pygame.display.update()
 
+    #adds in the area that shows the user the next piece they will be using 
     def next_tetrimino_display(tetrimino, surface):
         font = pygame.font.SysFont('Fixedsys', 25)
         label = font.render('Next', True, (255, 255, 255))
@@ -331,9 +328,10 @@ def game():
                     block_label = font.render(column, True, pygame.Color(color))
                     surface.blit(block_label, (upper_left_x + play_width + 50 + j*block_size + block_size/2 - block_label.get_width()/2, upper_left_y + play_height/2 - 100 + i*block_size + block_size/2 - block_label.get_height()/2))
 
-
-
+    #the game figure movement+playing operations
     def figure_main_movement():
+            #loops the music so it plays the entire duration of the game
+            mixer.music.load(Tetris_theme_music)
             mixer.music.play(loops=-1) 
             global grid
             #have to account for "locking" the pieces in place. 
@@ -349,6 +347,7 @@ def game():
             clock= pygame.time.Clock()
 
             while running: 
+                #can change to increase the difficulty for the player. 
                 fall_speed= 0.29
                 grid= create_grid(locked_positions)
                 fall_time +=clock.get_rawtime()
@@ -394,6 +393,7 @@ def game():
 
                 tetrimino_position= convert_format_of_tetrimino(current_tetrimino)
 
+
                 for i in range (len(tetrimino_position)):
                     x, y= tetrimino_position[i]
                     if y>= 0:
@@ -406,29 +406,32 @@ def game():
                     next_tetrimino= grabbing_tetrimino()
                     change_tetrimino= False
 
+                    #calling to eliminate full rows based off the grid and locked positions of tetriminos
                     eliminate_full_row(grid, locked_positions)
-                
+                #drawing updated screen
                 window_draw(win)
+                #drawing the new next tetrimino
                 next_tetrimino_display(next_tetrimino,win)
                 pygame.display.update()
-
+                #checking if the player lost+ stopping the game if they did
                 if lost_check(locked_positions): 
                     running= False
                     mixer.music.stop()
+                    pygame.time.delay(2000)
             win.fill(black)
             game_over('GAME OVER :(', 60, white, win)
             pygame.display.update()
             pygame.time.delay(3000)
 
-            losescreen.losing()#look into this
-
+            losescreen.losing()
+    #gives the instructions + press to start menu first
     def startup_screen():
             running = True
             while running:
-                win.fill(black)
+                win.fill(black)#ensures no text overlap between texts displayed
                 instructional_text('Welcome to Tetris. The instructions are pretty simple.', 40, white, win)
-                pygame.display.update()
-                pygame.time.delay(4000)
+                pygame.display.update() #updates the screen with the text display
+                pygame.time.delay(4000) #allows the user time to read the code
                 win.fill(black)
                 instructional_text('Move and rotate tetriminos coming from the top to form complete rows.', 30, white, win)
                 pygame.display.update()
@@ -460,11 +463,11 @@ def game():
                     if event.type == pygame.QUIT:
                         running = False
                     if event.type == pygame.KEYDOWN:
-                        figure_main_movement()
+                        figure_main_movement() #if you press any key, you go into the game!
                                         
             pygame.quit()
         
-        
+     #sets screen to be the size of the input screen width+screen height. Gives the display!   
     win = pygame.display.set_mode((screen_width, screen_height))
 
     startup_screen()
