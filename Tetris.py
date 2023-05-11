@@ -9,7 +9,7 @@ import tkinter as tk
 
 pygame.init()
 pygame.font.init()
-pygame.mixer.init()
+mixer.init()
 
 
 #Global Variables + Audios
@@ -153,7 +153,8 @@ tetrimino_colors= [green, red, cyan,yellow, orange ,blue,purple] #should make co
 #function that holds the placement of the pieces!
 #new keyword; self! Did a bit of research for it :) 
 def game(): 
-        
+    Tetris_theme_music = 'Tetris Theme Song.mp3'
+    mixer.music.load(Tetris_theme_music)
     class Piece(object):
             rows=20
             columns=10

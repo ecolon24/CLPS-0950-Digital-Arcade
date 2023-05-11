@@ -2,8 +2,14 @@ import pygame
 import sys
 import arcade
 pygame.init()
+from pygame import mixer
+mixer.init()
 
 def losing():
+    
+    losing = 'gameover.wav'
+    mixer.music.load(losing) 
+    mixer.music.play()  
     (width, height) = (1200, 800)
     background_colour = (204,229,255)
     button_light = (170,170,170)
@@ -20,7 +26,7 @@ def losing():
 
     #initialising the text
     textfont = pygame.font.SysFont('Arial',18)
-    bigfont = pygame.font.SysFont('Arial',30)
+    bigfont = pygame.font.SysFont('Arial',50)
     quittext = textfont.render('Quit' , True , black)
     losetext = bigfont.render('You Lost!', True , black)
     mainmenutext = textfont.render('Main Menu' , True , black)
@@ -30,7 +36,7 @@ def losing():
     screen.fill(background_colour)
     while running == True:
         mouse = pygame.mouse.get_pos()
-        screen.blit(losetext , (width/2-65,height/4))
+        screen.blit(losetext , (width/2-100,height/4))
         
         #hovering over them changes the colours of the buttons
         if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:

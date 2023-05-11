@@ -28,7 +28,7 @@ def game():
     food_spawn = True
     newdirection = []
     direction = []
-    snake_score = 2
+    snake_score = 1
 
     #initialising text
     textfont = pygame.font.SysFont('Arial',18)
@@ -51,8 +51,6 @@ def game():
 
     #creating snake dimensions and location
     snake_body = [  [600, 400],
-                    [580, 400],
-                    [560, 400],
                 ]
     snake_position = [width/2, height/2]
 
@@ -192,9 +190,6 @@ def game():
             if random.random() < 0.1:  # 10% chance of spawning special food
                 special_food_spawn = True
     
-
-       else:
-            snake_body.pop()
         
        #drawing the game screen
        pygame.draw.rect(screen, black, [300, 100, 600, 600])
@@ -205,7 +200,7 @@ def game():
         
        #self collision mechanics
        if snake_position in snake_body[1:]:
-            if (snake_position in snake_body[1:]) and (len(snake_body) > 3):
+            if (snake_position in snake_body[1:]):
                 running = False
                 losescreen.losing()
 

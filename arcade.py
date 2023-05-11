@@ -7,11 +7,15 @@ import os.path
 import Tetris
 import snake
 import pong
+from pygame import mixer
 
 def main_menu():
     pygame.init()
+    pygame.mixer.init()
 
-   
+    theme_music = 'arcadebackgroundmusic.mp3'
+    mixer.music.load(theme_music) 
+    mixer.music.play(loops=-1)   
     background_colour = (204,229,255)
     button_light = (170,170,170)
     button_dark = (140,140,140)
@@ -81,14 +85,17 @@ def main_menu():
             #What happens when the tetris button is clicked
                 if width/2-280 <= mouse[0] <= width/2-140 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
+                    mixer.music.stop()
                     Tetris.game() 
             #What happens when the snake button is clicked
                 if width/2-70 <= mouse[0] <= width/2+70 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
+                    mixer.music.stop()
                     snake.game()
             #What happens when the space invaders button is clicked
                 if width/2+140 <= mouse[0] <= width/2+280 and height/2-60 <= mouse[1] <= height/2-20:
                     running = False
+                    mixer.music.stop()
                     pong.game()
                     #space_invaders.space_invaders() 
                   
