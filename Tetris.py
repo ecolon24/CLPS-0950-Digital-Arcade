@@ -186,6 +186,11 @@ def game():
                     locked_positions[new_key] = locked_positions.pop(key)
 
     #start text
+    def instructional_text(text,size,color,surface):
+        i_font= pygame.font.SysFont('Fixedsys', size)
+        label= i_font.render(text, 1, color)
+        surface.blit(label, (upper_left_x+play_width/2 - (label.get_width()/2), upper_left_y + play_height/2 - label.get_height()/2))
+
     def centered_text(text, size, color, surface):
         font = pygame.font.SysFont('Fixedsys', size)
         label= font.render(text, 1, color)
@@ -409,8 +414,8 @@ def game():
                 if lost_check(locked_positions): 
                     running= False
                     mixer.music.stop()
-            
-            game_over('GAME OVER :(', 40, (255,255,255),win)
+            win.fill(black)
+            game_over('GAME OVER :(', 60, white, win)
             pygame.display.update()
             pygame.time.delay(3000)
 
@@ -420,14 +425,42 @@ def game():
             running = True
             while running:
                 win.fill(black)
-                centered_text('PRESS TO START', 40, (255, 255, 255), win)
+                instructional_text('Welcome to Tetris. The instructions are pretty simple.', 40, white, win)
+                pygame.display.update()
+                pygame.time.delay(4000)
+                win.fill(black)
+                instructional_text('Move and rotate tetriminos coming from the top to form complete rows.', 30, white, win)
+                pygame.display.update()
+                pygame.time.delay(4000)
+                win.fill(black)
+                instructional_text('The right key moves the tetrimino right.', 35, white, win)
+                pygame.display.update()
+                pygame.time.delay(4000)
+                win.fill(black)
+                instructional_text('The left key moves the tetrimino left.', 35, white, win)
+                pygame.display.update()
+                pygame.time.delay(4000)
+                win.fill(black)
+                instructional_text('The up key rotates the tetrimino.', 35, white, win)
+                pygame.display.update()
+                pygame.time.delay(4000)
+                win.fill(black)
+                instructional_text('The down key moves the tetrimino down the screen.',35, white, win)
+                pygame.display.update()
+                pygame.time.delay(4000)
+                win.fill(black)
+                instructional_text('Good luck!',40,white, win)
+                pygame.display.update()
+                pygame.time.delay(3000)
+                win.fill(black)
+                centered_text('PRESS TO START', 40, (255,255,255), win)
                 pygame.display.update()
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         running = False
                     if event.type == pygame.KEYDOWN:
                         figure_main_movement()
-                        
+                                        
             pygame.quit()
         
         
