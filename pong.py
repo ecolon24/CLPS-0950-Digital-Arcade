@@ -205,10 +205,10 @@ def game():
                 pygame.draw.circle(window, self.color, (int(self.x), int(self.y)), self.radius)
 
             def hit_paddle(self, paddle):
-                if (self.x - self.radius <= paddle.x + (paddle.width + 15) and
+                if (self.x - self.radius <= paddle.x + (paddle.width + 5) and
                     self.x + self.radius >= paddle.x and
                     self.y + self.radius >= paddle.y and
-                    self.y - self.radius <= paddle.y + (paddle.height + 10)):
+                    self.y - self.radius <= paddle.y + (paddle.height + 5)):
                     return True
                 else:
                     return False
